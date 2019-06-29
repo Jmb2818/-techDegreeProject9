@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UIViewController {
+class MasterViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var remindersTableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -30,12 +30,31 @@ class MasterViewController: UIViewController {
     }
     
     @IBAction func addReminder(_ sender: UIBarButtonItem) {
-        let model = ReminderModel(reminder: "", isChecked: false)
-        Reminder.with(model, in: coreDataStack.managedObjectContext)
-        coreDataStack.managedObjectContext.saveChanges()
+        presentDetailView(with: nil)
     }
-}
-
-extension MasterViewController: UITableViewDelegate {
     
+    private func presentDetailView(with reminder: Reminder?, from row: Int = 0) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let controller = storyBoard.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController else {
+            return
+        }
+        
+        if let reminder = reminder {
+            let model = ReminderModel(reminder: reminder)
+            controller.model = model
+            controller.reminder = reminder
+            controller.row = row
+        } else {
+            controller.model = ReminderModel(reminder: "", isChecked: false)
+            controller.row = row
+        }
+        
+        controller.coreDataStack = coreDataStack
+        show(controller, sender: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reminder = dataSource.reminderAt(indexPath)
+        presentDetailView(with: reminder, from: indexPath.row)
+    }
 }
