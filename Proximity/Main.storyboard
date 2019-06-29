@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxr-4l-J87">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Reminders-->
+        <scene sceneID="azE-VG-HwX">
+            <objects>
+                <viewController id="8Xi-rK-LL4" customClass="MasterViewController" customModule="Proximity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fzn-oE-P8Y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EHV-KU-Y0w">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reminderCell" rowHeight="151" id="jGd-i1-h67" customClass="ReminderCell" customModule="Proximity" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="151"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jGd-i1-h67" id="jlu-kz-xoE">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="151"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="731-KN-C7I">
+                                                    <rect key="frame" x="35" y="8" width="344" height="100"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbt-Fe-ron">
+                                                            <rect key="frame" x="125" y="35" width="189" height="30"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyb-6z-pq6">
+                                                            <rect key="frame" x="30" y="17.5" width="65" height="65"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="65" id="Lzt-Bm-NGt"/>
+                                                                <constraint firstAttribute="width" constant="65" id="PTH-sS-ILa"/>
+                                                            </constraints>
+                                                            <state key="normal" image="unfilledCircle"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="gbt-Fe-ron" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="Fx3-jU-dnH"/>
+                                                        <constraint firstItem="nyb-6z-pq6" firstAttribute="leading" secondItem="731-KN-C7I" secondAttribute="leading" constant="30" id="aZu-b9-YEf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gbt-Fe-ron" secondAttribute="trailing" constant="30" id="bXM-wE-qze"/>
+                                                        <constraint firstAttribute="height" constant="100" id="lHH-4h-woW"/>
+                                                        <constraint firstItem="nyb-6z-pq6" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="pdQ-qN-N5X"/>
+                                                        <constraint firstItem="gbt-Fe-ron" firstAttribute="leading" secondItem="nyb-6z-pq6" secondAttribute="trailing" constant="30" id="poB-eN-L7C"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="731-KN-C7I" secondAttribute="bottom" constant="8" id="8IE-qq-5BU"/>
+                                                <constraint firstItem="731-KN-C7I" firstAttribute="top" secondItem="jlu-kz-xoE" secondAttribute="top" constant="8" id="I1F-87-0hC"/>
+                                                <constraint firstItem="731-KN-C7I" firstAttribute="centerX" secondItem="jlu-kz-xoE" secondAttribute="centerX" id="RJM-YZ-T0p"/>
+                                                <constraint firstItem="731-KN-C7I" firstAttribute="leading" secondItem="jlu-kz-xoE" secondAttribute="leading" constant="35" id="XBE-U4-H2U"/>
+                                                <constraint firstAttribute="trailing" secondItem="731-KN-C7I" secondAttribute="trailing" constant="35" id="arB-7C-D6l"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkedButton" destination="nyb-6z-pq6" id="D5B-1f-Tpa"/>
+                                            <outlet property="reminderLabel" destination="gbt-Fe-ron" id="JcV-Nv-O4s"/>
+                                            <outlet property="reminderView" destination="731-KN-C7I" id="iGF-hp-t4j"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="8Xi-rK-LL4" id="0Yp-9V-0dI"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EHV-KU-Y0w" firstAttribute="leading" secondItem="7Kr-WK-VnF" secondAttribute="leading" id="Shc-av-E7V"/>
+                            <constraint firstItem="EHV-KU-Y0w" firstAttribute="top" secondItem="7Kr-WK-VnF" secondAttribute="top" id="c2c-Ay-ZQw"/>
+                            <constraint firstItem="7Kr-WK-VnF" firstAttribute="bottom" secondItem="EHV-KU-Y0w" secondAttribute="bottom" id="k78-HA-vCg"/>
+                            <constraint firstItem="7Kr-WK-VnF" firstAttribute="trailing" secondItem="EHV-KU-Y0w" secondAttribute="trailing" id="nSt-da-YUi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Kr-WK-VnF"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Reminders" largeTitleDisplayMode="always" id="CVa-zZ-Kxf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hAM-bT-1P3">
+                            <color key="tintColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="addReminder:" destination="8Xi-rK-LL4" id="Us5-FQ-9fK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="hAM-bT-1P3" id="pbD-Uf-ULe"/>
+                        <outlet property="remindersTableView" destination="EHV-KU-Y0w" id="bMi-BX-efh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cLV-vt-LwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1028.985507246377" y="127.90178571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yOw-eh-Uu3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yxr-4l-J87" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="qzX-0j-o8g">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.4392156862745098" green="0.68235294117647061" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Xi-rK-LL4" kind="relationship" relationship="rootViewController" id="fNR-NE-9le"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b6s-ln-Ob3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="118.84057971014494" y="127.90178571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="unfilledCircle" width="1980.5" height="1980"/>
+    </resources>
+</document>
