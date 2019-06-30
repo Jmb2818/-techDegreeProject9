@@ -240,27 +240,43 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m3a-fm-HtJ">
                                 <rect key="frame" x="0.0" y="0.0" width="334" height="559"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aja-dv-sf4">
+                                <rect key="frame" x="254" y="479" width="65" height="65"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="2kL-Kk-3Qg"/>
+                                    <constraint firstAttribute="height" constant="65" id="QTp-xX-6sq"/>
+                                </constraints>
+                                <state key="normal" image="refreshLocation"/>
+                                <connections>
+                                    <action selector="refreshLocation:" destination="kk2-ug-3Lm" eventType="touchUpInside" id="TEv-cp-AjU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="m3a-fm-HtJ" secondAttribute="bottom" id="Ceh-PM-OmG"/>
                             <constraint firstItem="m3a-fm-HtJ" firstAttribute="centerX" secondItem="mQ0-E0-fsc" secondAttribute="centerX" id="JiY-1i-V6Q"/>
+                            <constraint firstAttribute="bottom" secondItem="aja-dv-sf4" secondAttribute="bottom" constant="15" id="QeF-JR-MPP"/>
                             <constraint firstItem="m3a-fm-HtJ" firstAttribute="top" secondItem="mQ0-E0-fsc" secondAttribute="top" id="Z1S-B3-nQL"/>
                             <constraint firstAttribute="trailing" secondItem="m3a-fm-HtJ" secondAttribute="trailing" id="t75-Eo-S9r"/>
+                            <constraint firstAttribute="trailing" secondItem="aja-dv-sf4" secondAttribute="trailing" constant="15" id="wD3-EF-vzH"/>
                             <constraint firstItem="m3a-fm-HtJ" firstAttribute="leading" secondItem="mQ0-E0-fsc" secondAttribute="leading" id="yO3-La-LWJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3ID-ej-BRv"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="m3a-fm-HtJ" id="lkm-wl-y2e"/>
+                        <outlet property="refreshLocationButton" destination="aja-dv-sf4" id="r9H-eQ-3wv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbe-JI-0Tm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730" y="128"/>
+            <point key="canvasLocation" x="2728.985507246377" y="127.56696428571428"/>
         </scene>
     </scenes>
     <resources>
+        <image name="refreshLocation" width="417" height="417"/>
         <image name="unfilledCircle" width="1980.5" height="1980"/>
     </resources>
 </document>

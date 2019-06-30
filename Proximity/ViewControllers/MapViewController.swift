@@ -13,6 +13,7 @@ class MapViewController: UIViewController {
     
     // MARK: IBOutlets
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var refreshLocationButton: UIButton!
     
     // MARK: Properties
     private let locationManager = CLLocationManager()
@@ -22,12 +23,18 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        setupRefreshButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         focusOnCurrentLocation()
     }
+    
+    @IBAction func refreshLocation(_ sender: UIButton) {
+        focusOnCurrentLocation()
+    }
+    
     
     /// Funcion to zoom in on users current location if permission has been given
     func focusOnCurrentLocation() {
@@ -43,6 +50,12 @@ class MapViewController: UIViewController {
             
             mapView.setRegion(coordinateRegion, animated: true)
         }
+    }
+    
+    func setupRefreshButton() {
+        refreshLocationButton.layer.masksToBounds = false
+        refreshLocationButton.layer.cornerRadius = 0.5 * refreshLocationButton.bounds.size.width
+        refreshLocationButton.clipsToBounds = true
     }
 }
 
