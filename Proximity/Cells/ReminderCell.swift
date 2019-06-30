@@ -13,6 +13,7 @@ class ReminderCell: UITableViewCell {
     @IBOutlet weak var reminderView: UIView!
     @IBOutlet weak var reminderLabel: UILabel!
     @IBOutlet weak var checkedButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +32,11 @@ class ReminderCell: UITableViewCell {
         let image = model.isChecked ? #imageLiteral(resourceName: "filledCircle") : #imageLiteral(resourceName: "unfilledCircle")
         checkedButton.setImage(image, for: .normal)
         reminderLabel.text = model.reminder
+        if let location = model.locationLabel {
+            locationLabel.text = location
+        } else {
+            locationLabel.text = nil
+        }
     }
     
     private func isEven(_ int: Int) -> Bool {

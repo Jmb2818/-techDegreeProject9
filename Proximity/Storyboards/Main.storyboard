@@ -32,12 +32,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="731-KN-C7I">
                                                     <rect key="frame" x="35" y="8" width="344" height="100"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gbt-Fe-ron">
-                                                            <rect key="frame" x="125" y="35" width="189" height="30"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyb-6z-pq6">
                                                             <rect key="frame" x="30" y="17.5" width="65" height="65"/>
                                                             <constraints>
@@ -46,15 +40,32 @@
                                                             </constraints>
                                                             <state key="normal" image="unfilledCircle"/>
                                                         </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wuX-ns-FRb">
+                                                            <rect key="frame" x="125" y="22" width="189" height="56"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gbt-Fe-ron">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="189" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zh-t9-Kt7">
+                                                                    <rect key="frame" x="0.0" y="38" width="189" height="18"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="gbt-Fe-ron" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="Fx3-jU-dnH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="wuX-ns-FRb" secondAttribute="trailing" constant="30" id="YYh-Nw-0qb"/>
                                                         <constraint firstItem="nyb-6z-pq6" firstAttribute="leading" secondItem="731-KN-C7I" secondAttribute="leading" constant="30" id="aZu-b9-YEf"/>
-                                                        <constraint firstAttribute="trailing" secondItem="gbt-Fe-ron" secondAttribute="trailing" constant="30" id="bXM-wE-qze"/>
+                                                        <constraint firstItem="wuX-ns-FRb" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="djW-8a-XVZ"/>
                                                         <constraint firstAttribute="height" constant="100" id="lHH-4h-woW"/>
                                                         <constraint firstItem="nyb-6z-pq6" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="pdQ-qN-N5X"/>
-                                                        <constraint firstItem="gbt-Fe-ron" firstAttribute="leading" secondItem="nyb-6z-pq6" secondAttribute="trailing" constant="30" id="poB-eN-L7C"/>
+                                                        <constraint firstItem="wuX-ns-FRb" firstAttribute="leading" secondItem="nyb-6z-pq6" secondAttribute="trailing" constant="30" id="q0T-zK-KtH"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -68,6 +79,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="checkedButton" destination="nyb-6z-pq6" id="D5B-1f-Tpa"/>
+                                            <outlet property="locationLabel" destination="7Zh-t9-Kt7" id="MZU-fT-V3S"/>
                                             <outlet property="reminderLabel" destination="gbt-Fe-ron" id="JcV-Nv-O4s"/>
                                             <outlet property="reminderView" destination="731-KN-C7I" id="iGF-hp-t4j"/>
                                         </connections>
@@ -180,8 +192,10 @@
                         <viewLayoutGuide key="safeArea" id="k9a-m0-1cU"/>
                     </view>
                     <connections>
+                        <outlet property="locationLabel" destination="TnI-Pd-R9w" id="sYd-ik-jNf"/>
                         <outlet property="mapContainerView" destination="e19-FE-V24" id="UbG-4v-9fV"/>
                         <outlet property="reminderView" destination="8dc-MX-ZmM" id="aLR-yi-Xks"/>
+                        <outlet property="selectLocationLabel" destination="cDM-Lu-55D" id="Mi2-9K-LLD"/>
                         <outlet property="textField" destination="AWr-DB-nbu" id="VhS-qL-nMh"/>
                     </connections>
                 </viewController>
@@ -235,6 +249,7 @@
                             <constraint firstAttribute="trailing" secondItem="m3a-fm-HtJ" secondAttribute="trailing" id="t75-Eo-S9r"/>
                             <constraint firstItem="m3a-fm-HtJ" firstAttribute="leading" secondItem="mQ0-E0-fsc" secondAttribute="leading" id="yO3-La-LWJ"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="3ID-ej-BRv"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="m3a-fm-HtJ" id="lkm-wl-y2e"/>

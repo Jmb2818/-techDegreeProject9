@@ -24,6 +24,7 @@ extension Reminder {
     @NSManaged public var creationDate: Date
     @NSManaged public var reminder: String
     @NSManaged public var isChecked: Bool
+    @NSManaged public var locationLabel: String?
 }
 
 extension Reminder {
