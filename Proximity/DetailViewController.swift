@@ -11,11 +11,10 @@ import MapKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var reminderView: UIView!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var mapView: MKMapView!
-    
-    
+    private weak var mapView: MapViewController!
     
     var reminder: Reminder?
     var model: ReminderModel?
@@ -27,6 +26,13 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupView()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let destination = segue.destination as? MapViewController {
+            mapView = destination
+        }
     }
     
     func setupNavigationBar() {
@@ -51,8 +57,8 @@ class DetailViewController: UIViewController {
         reminderView.layer.shadowOpacity = 1
         reminderView.clipsToBounds = false
         reminderView.backgroundColor = isEven(row) ? #colorLiteral(red: 0.8980392157, green: 0.5450980392, blue: 0.5333333333, alpha: 1) : #colorLiteral(red: 0.9254901961, green: 0.7450980392, blue: 0.4784313725, alpha: 1)
-        mapView.layer.masksToBounds = false
-        mapView.layer.cornerRadius = 20
+        mapContainerView.layer.cornerRadius = 20
+        mapContainerView.layer.masksToBounds = true
     }
     
     @objc func saveReminder() {

@@ -116,46 +116,67 @@
                                 <rect key="frame" x="20" y="64" width="374" height="778"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AWr-DB-nbu">
-                                        <rect key="frame" x="50" y="70" width="274" height="30"/>
+                                        <rect key="frame" x="50" y="66" width="274" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8CM-Oc-y83">
-                                        <rect key="frame" x="15" y="200" width="344" height="558"/>
-                                    </mapView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e19-FE-V24">
+                                        <rect key="frame" x="20" y="177" width="334" height="581"/>
+                                        <connections>
+                                            <segue destination="kk2-ug-3Lm" kind="embed" id="2P8-yH-Ne9"/>
+                                        </connections>
+                                    </containerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qI-e8-QjX">
+                                        <rect key="frame" x="50" y="30" width="178" height="21"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select A Location For The Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-Lu-55D">
+                                        <rect key="frame" x="44.5" y="146" width="285" height="21"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="1mE-mU-hh9"/>
-                                    <constraint firstItem="8CM-Oc-y83" firstAttribute="top" secondItem="AWr-DB-nbu" secondAttribute="bottom" constant="100" id="917-8v-O3W"/>
-                                    <constraint firstAttribute="trailing" secondItem="AWr-DB-nbu" secondAttribute="trailing" constant="50" id="JMk-Qe-dea"/>
-                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="top" secondItem="8dc-MX-ZmM" secondAttribute="top" constant="70" id="QXQ-sp-iXB"/>
-                                    <constraint firstAttribute="bottom" secondItem="8CM-Oc-y83" secondAttribute="bottom" constant="20" id="VYS-Xj-6Gd"/>
-                                    <constraint firstItem="8CM-Oc-y83" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="15" id="g56-D0-A2Q"/>
-                                    <constraint firstAttribute="trailing" secondItem="8CM-Oc-y83" secondAttribute="trailing" constant="15" id="msj-ez-i3i"/>
-                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="50" id="t4Q-9K-qmQ"/>
+                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="6po-xH-6Lj"/>
+                                    <constraint firstAttribute="trailing" secondItem="e19-FE-V24" secondAttribute="trailing" constant="20" id="DFD-J5-87w"/>
+                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="50" id="GpE-7b-cbj"/>
+                                    <constraint firstItem="e19-FE-V24" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="PO2-hp-p2w"/>
+                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="top" secondItem="5qI-e8-QjX" secondAttribute="bottom" constant="15" id="Sj5-Nh-Xl0"/>
+                                    <constraint firstAttribute="bottom" secondItem="e19-FE-V24" secondAttribute="bottom" constant="20" id="arc-GV-2eU"/>
+                                    <constraint firstItem="5qI-e8-QjX" firstAttribute="top" secondItem="8dc-MX-ZmM" secondAttribute="top" constant="30" id="fcq-eh-G86"/>
+                                    <constraint firstItem="5qI-e8-QjX" firstAttribute="leading" secondItem="AWr-DB-nbu" secondAttribute="leading" id="hto-vZ-TNn"/>
+                                    <constraint firstItem="e19-FE-V24" firstAttribute="top" secondItem="cDM-Lu-55D" secondAttribute="bottom" constant="10" id="iqj-7d-tYn"/>
+                                    <constraint firstItem="cDM-Lu-55D" firstAttribute="top" secondItem="AWr-DB-nbu" secondAttribute="bottom" constant="50" id="nbg-sR-IcW"/>
+                                    <constraint firstAttribute="trailing" secondItem="AWr-DB-nbu" secondAttribute="trailing" constant="50" id="q3r-9M-4SO"/>
+                                    <constraint firstItem="e19-FE-V24" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="20" id="rHJ-ML-F1a"/>
+                                    <constraint firstItem="cDM-Lu-55D" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="rWB-XR-l3R"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8dc-MX-ZmM" firstAttribute="top" secondItem="k9a-m0-1cU" secondAttribute="top" constant="20" id="2ZZ-5N-hzl"/>
                             <constraint firstItem="8dc-MX-ZmM" firstAttribute="leading" secondItem="k9a-m0-1cU" secondAttribute="leading" constant="20" id="8ll-qc-7uH"/>
+                            <constraint firstItem="8dc-MX-ZmM" firstAttribute="centerX" secondItem="LDP-X7-wnn" secondAttribute="centerX" id="QaQ-bR-sH9"/>
                             <constraint firstItem="k9a-m0-1cU" firstAttribute="trailing" secondItem="8dc-MX-ZmM" secondAttribute="trailing" constant="20" id="dat-bO-DEo"/>
                             <constraint firstItem="k9a-m0-1cU" firstAttribute="bottom" secondItem="8dc-MX-ZmM" secondAttribute="bottom" constant="20" id="iyV-kp-9iG"/>
+                            <constraint firstItem="8dc-MX-ZmM" firstAttribute="top" secondItem="k9a-m0-1cU" secondAttribute="top" constant="20" id="nSk-x6-Njl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="k9a-m0-1cU"/>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="8CM-Oc-y83" id="Cnh-TP-oc7"/>
+                        <outlet property="mapContainerView" destination="e19-FE-V24" id="UbG-4v-9fV"/>
                         <outlet property="reminderView" destination="8dc-MX-ZmM" id="aLR-yi-Xks"/>
                         <outlet property="textField" destination="AWr-DB-nbu" id="VhS-qL-nMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3c-bz-0Hq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2009" y="128"/>
+            <point key="canvasLocation" x="2008.6956521739132" y="127.90178571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yOw-eh-Uu3">
@@ -182,6 +203,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6s-ln-Ob3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="118.84057971014494" y="127.90178571428571"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="d9n-lK-EeI">
+            <objects>
+                <viewController id="kk2-ug-3Lm" customClass="MapViewController" customModule="Proximity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mQ0-E0-fsc">
+                        <rect key="frame" x="0.0" y="0.0" width="334" height="581"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m3a-fm-HtJ">
+                                <rect key="frame" x="0.0" y="0.0" width="334" height="581"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="m3a-fm-HtJ" secondAttribute="bottom" id="Ceh-PM-OmG"/>
+                            <constraint firstItem="m3a-fm-HtJ" firstAttribute="centerX" secondItem="mQ0-E0-fsc" secondAttribute="centerX" id="JiY-1i-V6Q"/>
+                            <constraint firstItem="m3a-fm-HtJ" firstAttribute="top" secondItem="mQ0-E0-fsc" secondAttribute="top" id="Z1S-B3-nQL"/>
+                            <constraint firstAttribute="trailing" secondItem="m3a-fm-HtJ" secondAttribute="trailing" id="t75-Eo-S9r"/>
+                            <constraint firstItem="m3a-fm-HtJ" firstAttribute="leading" secondItem="mQ0-E0-fsc" secondAttribute="leading" id="yO3-La-LWJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cbe-JI-0Tm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2730" y="128"/>
         </scene>
     </scenes>
     <resources>
