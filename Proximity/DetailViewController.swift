@@ -81,6 +81,21 @@ class DetailViewController: UIViewController {
         reminder.setValue(textField.text, forKey: "reminder")
     }
     
+    private func formatSubViews() {
+        // Round the reminderView everything is held in
+        reminderView.layer.masksToBounds = false
+        reminderView.layer.cornerRadius = 20
+        reminderView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        reminderView.layer.shadowRadius = 2
+        reminderView.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        reminderView.layer.shadowOpacity = 1
+        reminderView.clipsToBounds = false
+        
+        // Round the containerView
+        mapContainerView.layer.cornerRadius = 20
+        mapContainerView.layer.masksToBounds = true
+    }
+    
     @objc func cancelReminder() {
         navigationController?.popToRootViewController(animated: true)
     }
