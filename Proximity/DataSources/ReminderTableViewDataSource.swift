@@ -51,21 +51,6 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-////    }
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        switch editingStyle {
-//        case .delete:
-//            let entry = fetchedResultsController.object(at: indexPath)
-//            context.delete(entry)
-//            context.saveChanges()
-//        default:
-//            break
-//        }
-//    }
-    
     // MARK: Helper Functions
     /// Function to return the reminder at the indexPath in the fetchedResultsController
     func reminderAt(_ indexPath: IndexPath) -> Reminder {

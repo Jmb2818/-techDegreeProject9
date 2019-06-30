@@ -53,6 +53,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B640C5422C939AE00525302 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B640C5022C712DC00525302 /* DetailViewController.swift */,
+				0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */,
+				0B640C5222C8C9D700525302 /* MapViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		0BA3F0C422C32DF9008AE56B = {
 			isa = PBXGroup;
 			children = (
@@ -72,23 +82,61 @@
 		0BA3F0CF22C32DF9008AE56B /* Proximity */ = {
 			isa = PBXGroup;
 			children = (
+				0BC4B9F622C93D10005748FE /* DataSources */,
+				0BC4B9F522C93CFF005748FE /* Storyboards */,
+				0BC4B9F422C93CDD005748FE /* CoreData */,
+				0BC4B9F322C93CB0005748FE /* Models */,
+				0BC4B9F222C93C80005748FE /* Cells */,
+				0B640C5422C939AE00525302 /* ViewControllers */,
 				0BA3F0D022C32DF9008AE56B /* AppDelegate.swift */,
 				0BA3F0D722C32DFD008AE56B /* Assets.xcassets */,
-				0BA3F0E222C32EC7008AE56B /* Main.storyboard */,
-				0BA3F0D922C32DFD008AE56B /* LaunchScreen.storyboard */,
 				0BA3F0DC22C32DFD008AE56B /* Info.plist */,
-				0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */,
-				0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */,
-				0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */,
-				0B640C4522C5CA1000525302 /* ReminderModel.swift */,
-				0B640C4722C6FA3400525302 /* Reminder.xcdatamodeld */,
-				0B640C4A22C6FA7A00525302 /* Reminder+Extension.swift */,
-				0B640C4C22C6FB1600525302 /* CoreDataStack.swift */,
-				0B640C4E22C6FD2E00525302 /* RemindersFetchedResultsController.swift */,
-				0B640C5022C712DC00525302 /* DetailViewController.swift */,
-				0B640C5222C8C9D700525302 /* MapViewController.swift */,
 			);
 			path = Proximity;
+			sourceTree = "<group>";
+		};
+		0BC4B9F222C93C80005748FE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0BC4B9F322C93CB0005748FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0B640C4722C6FA3400525302 /* Reminder.xcdatamodeld */,
+				0B640C4A22C6FA7A00525302 /* Reminder+Extension.swift */,
+				0B640C4522C5CA1000525302 /* ReminderModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0BC4B9F422C93CDD005748FE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0B640C4C22C6FB1600525302 /* CoreDataStack.swift */,
+				0B640C4E22C6FD2E00525302 /* RemindersFetchedResultsController.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		0BC4B9F522C93CFF005748FE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0BA3F0E222C32EC7008AE56B /* Main.storyboard */,
+				0BA3F0D922C32DFD008AE56B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0BC4B9F622C93D10005748FE /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */,
+			);
+			path = DataSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
