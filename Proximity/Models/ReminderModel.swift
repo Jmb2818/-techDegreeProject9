@@ -13,10 +13,10 @@ struct ReminderModel {
     let isChecked: Bool
     let locationLabel: String?
     
-    init(reminder: String, isChecked: Bool) {
+    init(reminder: String, isChecked: Bool, locationLabel: String? = nil) {
         self.reminder = reminder
         self.isChecked = isChecked
-        self.locationLabel = nil
+        self.locationLabel = locationLabel
     }
     
     init(reminder: Reminder) {

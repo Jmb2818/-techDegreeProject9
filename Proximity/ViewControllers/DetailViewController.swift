@@ -35,6 +35,7 @@ class DetailViewController: UIViewController {
         super.prepare(for: segue, sender: sender)
         if let destination = segue.destination as? MapViewController {
             mapView = destination
+            mapView.locationDelegate = self
         }
     }
     
@@ -49,13 +50,16 @@ class DetailViewController: UIViewController {
         }
         
         guard let reminder = reminder else {
-            let model = ReminderModel(reminder: textField.text ?? "", isChecked: false)
+            let model = ReminderModel(reminder: textField.text ?? "", isChecked: false, locationLabel: locationLabel.text)
             Reminder.with(model, in: coreDataStack.managedObjectContext)
             return
         }
         
         reminder.setValue(reminder.isChecked, forKey: "isChecked")
         reminder.setValue(textField.text, forKey: "reminder")
+        if let location = locationLabel.text {
+            reminder.setValue(location, forKey: "locationLabel")
+        }
     }
     
     
@@ -114,5 +118,11 @@ private extension DetailViewController {
             return true
         }
         return false
+    }
+}
+
+extension DetailViewController: LocationDelegate {
+    func locationSelected(locationString: String?) {
+        self.locationLabel.text = locationString
     }
 }

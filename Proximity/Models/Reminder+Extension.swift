@@ -40,5 +40,6 @@ extension Reminder {
         reminder.creationDate = Date()
         reminder.isChecked = model.isChecked
         reminder.reminder = model.reminder
+        reminder.locationLabel = model.locationLabel
     }
 }
