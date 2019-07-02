@@ -22,6 +22,7 @@
 		0BA3F0E722C44A15008AE56B /* ReminderTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */; };
 		0BA3F0EB22C4506C008AE56B /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */; };
 		0BC4B9F822CA787D005748FE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */; };
+		0BC4B9FB22CB063D005748FE /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewDataSource.swift; sourceTree = "<group>"; };
 		0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		0BA3F0CF22C32DF9008AE56B /* Proximity */ = {
 			isa = PBXGroup;
 			children = (
+				0BC4B9F922CB0629005748FE /* Helper */,
 				0BC4B9F622C93D10005748FE /* DataSources */,
 				0BC4B9F522C93CFF005748FE /* Storyboards */,
 				0BC4B9F422C93CDD005748FE /* CoreData */,
@@ -140,6 +143,14 @@
 				0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */,
 			);
 			path = DataSources;
+			sourceTree = "<group>";
+		};
+		0BC4B9F922CB0629005748FE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +236,7 @@
 				0B640C5122C712DC00525302 /* DetailViewController.swift in Sources */,
 				0B640C4922C6FA3400525302 /* Reminder.xcdatamodeld in Sources */,
 				0B640C4D22C6FB1600525302 /* CoreDataStack.swift in Sources */,
+				0BC4B9FB22CB063D005748FE /* GlobalFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

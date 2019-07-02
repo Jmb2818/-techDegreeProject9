@@ -110,17 +110,6 @@ private extension DetailViewController {
         mapContainerView.layer.cornerRadius = 20
         mapContainerView.layer.masksToBounds = true
     }
-    
-    // TODO: Probably a global helper function
-    func isEven(_ int: Int) -> Bool {
-        if int == 0 {
-            return true
-        }
-        if int % 2 == 0 {
-            return true
-        }
-        return false
-    }
 }
 
 extension DetailViewController: LocationDelegate {

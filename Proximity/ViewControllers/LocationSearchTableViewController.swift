@@ -56,19 +56,7 @@ extension LocationSearchTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
         let selectedLocation = matchingLocations[indexPath.row].placemark
         cell.textLabel?.text = selectedLocation.name
-        
-        let city = selectedLocation.locality ?? ""
-        let state = selectedLocation.administrativeArea ?? ""
-        if let street = selectedLocation.thoroughfare, let streetNum = selectedLocation.subThoroughfare {
-            let locationString = "\(streetNum) \(street) - \(city), \(state)"
-            cell.detailTextLabel?.text = locationString
-        } else if let street = selectedLocation.thoroughfare {
-            let locationString = "\(street) - \(city), \(state)"
-            cell.detailTextLabel?.text = locationString
-        } else {
-            let locationString = "\(city), \(state)"
-            cell.detailTextLabel?.text = locationString
-        }
+        cell.detailTextLabel?.text = format(selectedLocation)
         return cell
     }
     

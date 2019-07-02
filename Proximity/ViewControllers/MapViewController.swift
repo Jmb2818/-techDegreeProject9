@@ -110,15 +110,8 @@ class MapViewController: UIViewController {
             }
             
             if let location = placemarks?.first {
-                let city = location.locality ?? ""
-                let state = location.administrativeArea ?? ""
-                if let street = location.thoroughfare {
-                    let locationString = "\(street) - \(city), \(state)"
-                    self?.locationDelegate?.locationSelected(locationString: locationString)
-                } else {
-                    let locationString = "\(city), \(state)"
-                    self?.locationDelegate?.locationSelected(locationString: locationString)
-                }
+                let locationString = format(location)
+                self?.locationDelegate?.locationSelected(locationString: locationString)
             }
         }
     }
@@ -157,6 +150,7 @@ extension MapViewController: SearchLocationDelegate {
                                                   longitudinalMeters: regionRadius)
         
         mapView.setRegion(coordinateRegion, animated: true)
-        
+        let locationString = formatWithName(placemark)
+        locationDelegate?.locationSelected(locationString: locationString)
     }
 }
