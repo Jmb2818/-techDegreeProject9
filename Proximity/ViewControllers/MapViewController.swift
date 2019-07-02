@@ -12,7 +12,6 @@ import MapKit
 protocol LocationDelegate: class {
     func locationSelected(locationString: String?)
 }
-    
 
 class MapViewController: UIViewController {
     
@@ -59,6 +58,9 @@ class MapViewController: UIViewController {
         searchResultsController?.hidesNavigationBarDuringPresentation = false
         searchResultsController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
+        searchTableVC.mapView = mapView
+        searchTableVC.delegate = self
+        searchTableVC.searchController = searchResultsController
     }
     
     @IBAction func refreshLocation(_ sender: UIButton) {
@@ -139,5 +141,22 @@ extension MapViewController: CLLocationManagerDelegate {
         default:
             break
         }
+    }
+}
+
+extension MapViewController: SearchLocationDelegate {
+    func searchResultSelected(placemark: MKPlacemark) {
+        guard let location = placemark.location else {
+            return
+        }
+        
+        annotation.coordinate = location.coordinate
+        mapView.addAnnotation(annotation)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: regionRadius,
+                                                  longitudinalMeters: regionRadius)
+        
+        mapView.setRegion(coordinateRegion, animated: true)
+        
     }
 }
