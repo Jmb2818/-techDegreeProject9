@@ -21,6 +21,7 @@
 		0BA3F0E522C32F3E008AE56B /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */; };
 		0BA3F0E722C44A15008AE56B /* ReminderTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */; };
 		0BA3F0EB22C4506C008AE56B /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */; };
+		0BC4B9F822CA787D005748FE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewDataSource.swift; sourceTree = "<group>"; };
 		0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
+		0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				0B640C5022C712DC00525302 /* DetailViewController.swift */,
 				0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */,
 				0B640C5222C8C9D700525302 /* MapViewController.swift */,
+				0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				0B640C4F22C6FD2E00525302 /* RemindersFetchedResultsController.swift in Sources */,
 				0BA3F0E522C32F3E008AE56B /* MasterViewController.swift in Sources */,
 				0BA3F0E722C44A15008AE56B /* ReminderTableViewDataSource.swift in Sources */,
+				0BC4B9F822CA787D005748FE /* LocationSearchTableViewController.swift in Sources */,
 				0B640C4622C5CA1000525302 /* ReminderModel.swift in Sources */,
 				0BA3F0D122C32DF9008AE56B /* AppDelegate.swift in Sources */,
 				0BA3F0EB22C4506C008AE56B /* ReminderCell.swift in Sources */,

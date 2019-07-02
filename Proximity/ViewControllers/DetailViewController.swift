@@ -33,8 +33,9 @@ class DetailViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let destination = segue.destination as? MapViewController {
-            mapView = destination
+        if let destination = segue.destination as? UINavigationController,
+            let mapView = destination.viewControllers.first as? MapViewController {
+            self.mapView = mapView
             mapView.locationDelegate = self
         }
     }
@@ -110,6 +111,7 @@ private extension DetailViewController {
         mapContainerView.layer.masksToBounds = true
     }
     
+    // TODO: Probably a global helper function
     func isEven(_ int: Int) -> Bool {
         if int == 0 {
             return true

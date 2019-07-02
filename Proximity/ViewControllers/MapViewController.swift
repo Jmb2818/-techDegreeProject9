@@ -26,6 +26,7 @@ class MapViewController: UIViewController {
     private let annotation = MKPointAnnotation()
     private let geoCoder = CLGeocoder()
     weak var locationDelegate: LocationDelegate?
+    var searchResultsController: UISearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +34,31 @@ class MapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         setupRefreshButton()
         setupGestures()
+        setupSearch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         focusOnCurrentLocation()
+    }
+    
+    func setupSearch() {
+        guard let searchTableVC = storyboard?.instantiateViewController(withIdentifier: "LocationSearchTableViewController") as? LocationSearchTableViewController else {
+            return
+        }
+        searchResultsController = UISearchController(searchResultsController: searchTableVC)
+        searchResultsController?.searchResultsUpdater = searchTableVC
+        
+        guard let searchBar = searchResultsController?.searchBar else {
+            return
+        }
+        
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search For A Location"
+        navigationItem.titleView = searchBar
+        searchResultsController?.hidesNavigationBarDuringPresentation = false
+        searchResultsController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
     }
     
     @IBAction func refreshLocation(_ sender: UIButton) {
