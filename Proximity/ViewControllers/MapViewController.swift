@@ -34,6 +34,7 @@ class MapViewController: UIViewController {
         setupRefreshButton()
         setupGestures()
         setupSearch()
+        mapView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +103,11 @@ class MapViewController: UIViewController {
         let lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
+        let overlays = mapView.overlays
+        if !overlays.isEmpty {
+            mapView.removeOverlays(overlays)
+        }
+        mapView?.addOverlay(MKCircle(center: coordinate, radius: 100.00))
         
         // Convert the last location into a readable location for user
         geoCoder.reverseGeocodeLocation(lastLocation) { [weak self] placemarks, error in
@@ -114,6 +120,19 @@ class MapViewController: UIViewController {
                 self?.locationDelegate?.locationSelected(locationString: locationString)
             }
         }
+    }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKCircle {
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.lineWidth = 1.0
+            circleRenderer.strokeColor = .green
+            circleRenderer.fillColor = UIColor.green.withAlphaComponent(0.4)
+            return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
     }
 }
 
