@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         setupRefreshButton()
         setupGestures()
         setupSearch()
@@ -71,7 +71,8 @@ class MapViewController: UIViewController {
     
     /// Funcion to zoom in on users current location if permission has been given
     func focusOnCurrentLocation() {
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways  {
             guard let currentLocation = locationManager.location else {
                 locationManager.requestLocation()
                 return

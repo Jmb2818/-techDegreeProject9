@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This application would like to use your location while open. Is this ok?</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This application would like to use your location while in the background. This is needed to be able to notify of your reminders at all times. Is this ok?</string>
+	<string>This application needs constant access to your location to notify you. Is this ok?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This application needs constant access to your location to notify you. Is this ok?</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
