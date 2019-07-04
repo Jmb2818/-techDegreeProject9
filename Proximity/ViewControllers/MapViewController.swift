@@ -97,20 +97,25 @@ class MapViewController: UIViewController {
         mapView.addGestureRecognizer(tapRecognizer)
     }
     
-    /// Add a pin to the map when user taps it
-    @objc private func addAnnotationToLocation(sender: UITapGestureRecognizer) {
+    func addAnnotationAndOverlayFor(_ coordinate: CLLocationCoordinate2D) {
         let overlays = mapView.overlays
         if !overlays.isEmpty {
             mapView.removeOverlays(overlays)
         }
+        annotation.coordinate = coordinate
+        mapView?.addOverlay(MKCircle(center: coordinate, radius: 75.0))
+        mapView.addAnnotation(annotation)
+        
+    }
+    
+    /// Add a pin to the map when user taps it
+    @objc private func addAnnotationToLocation(sender: UITapGestureRecognizer) {
         let location = sender.location(in: mapView)
         let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
         let lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        annotation.coordinate = coordinate
         
         defer {
-            mapView?.addOverlay(MKCircle(center: coordinate, radius: 75.0))
-            mapView.addAnnotation(annotation)
+           addAnnotationAndOverlayFor(coordinate)
         }
         
         // Convert the last location into a readable location for user
@@ -127,6 +132,7 @@ class MapViewController: UIViewController {
     }
 }
 
+// MARK: MKMapViewDelegate Conformance
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
@@ -160,20 +166,19 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: Search Location Delegate ConformanceJO
 extension MapViewController: SearchLocationDelegate {
     func searchResultSelected(placemark: MKPlacemark) {
         guard let location = placemark.location else {
             return
         }
-        
-        annotation.coordinate = location.coordinate
-        mapView.addAnnotation(annotation)
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
                                                   latitudinalMeters: regionRadius,
                                                   longitudinalMeters: regionRadius)
         
         mapView.setRegion(coordinateRegion, animated: true)
         let locationString = formatWithName(placemark)
+        addAnnotationAndOverlayFor(location.coordinate)
         locationDelegate?.locationSelected(locationString: locationString)
     }
 }
