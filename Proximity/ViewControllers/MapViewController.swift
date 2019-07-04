@@ -20,7 +20,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var refreshLocationButton: UIButton!
     
     // MARK: Properties
-    private let locationManager = CLLocationManager()
+    weak var locationManager: CLLocationManager?
     private let regionRadius: CLLocationDistance = 1000
     private let annotation = MKPointAnnotation()
     private let geoCoder = CLGeocoder()
@@ -29,8 +29,8 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        locationManager?.delegate = self
+        locationManager?.requestAlwaysAuthorization()
         setupRefreshButton()
         setupGestures()
         setupSearch()
@@ -73,8 +73,8 @@ class MapViewController: UIViewController {
     func focusOnCurrentLocation() {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways  {
-            guard let currentLocation = locationManager.location else {
-                locationManager.requestLocation()
+            guard let currentLocation = locationManager?.location else {
+                locationManager?.requestLocation()
                 return
             }
             
@@ -99,16 +99,19 @@ class MapViewController: UIViewController {
     
     /// Add a pin to the map when user taps it
     @objc private func addAnnotationToLocation(sender: UITapGestureRecognizer) {
-        let location = sender.location(in: mapView)
-        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
-        let lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
         let overlays = mapView.overlays
         if !overlays.isEmpty {
             mapView.removeOverlays(overlays)
         }
-        mapView?.addOverlay(MKCircle(center: coordinate, radius: 100.00))
+        let location = sender.location(in: mapView)
+        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+        let lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        annotation.coordinate = coordinate
+        
+        defer {
+            mapView?.addOverlay(MKCircle(center: coordinate, radius: 75.0))
+            mapView.addAnnotation(annotation)
+        }
         
         // Convert the last location into a readable location for user
         geoCoder.reverseGeocodeLocation(lastLocation) { [weak self] placemarks, error in

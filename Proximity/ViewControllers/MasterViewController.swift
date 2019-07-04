@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class MasterViewController: UIViewController, UITableViewDelegate {
     
@@ -15,6 +16,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     var coreDataStack = CoreDataStack()
+    private let locationManager = CLLocationManager()
     lazy var dataSource: ReminderTableViewDataSource = {
         let request: NSFetchRequest<Reminder> = Reminder.fetchRequest()
         return ReminderTableViewDataSource(fetchRequest: request, managedObjectContext: self.coreDataStack.managedObjectContext, tableView: self.remindersTableView)
@@ -49,6 +51,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
             controller.row = row
         }
         
+        controller.locationManager = locationManager
         controller.coreDataStack = coreDataStack
         show(controller, sender: nil)
     }

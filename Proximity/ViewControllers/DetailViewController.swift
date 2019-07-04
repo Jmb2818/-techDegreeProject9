@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class DetailViewController: UIViewController {
     var model: ReminderModel?
     var coreDataStack: CoreDataStack?
     var row: Int?
+    weak var locationManager: CLLocationManager?
     
     
     override func viewDidLoad() {
@@ -37,6 +39,7 @@ class DetailViewController: UIViewController {
             let mapView = destination.viewControllers.first as? MapViewController {
             self.mapView = mapView
             mapView.locationDelegate = self
+            mapView.locationManager = locationManager
         }
     }
     
