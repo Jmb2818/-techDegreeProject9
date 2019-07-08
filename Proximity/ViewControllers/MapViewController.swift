@@ -166,7 +166,7 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: Search Location Delegate ConformanceJO
+// MARK: Search Location Delegate Conformance
 extension MapViewController: SearchLocationDelegate {
     func searchResultSelected(placemark: MKPlacemark) {
         guard let location = placemark.location else {
