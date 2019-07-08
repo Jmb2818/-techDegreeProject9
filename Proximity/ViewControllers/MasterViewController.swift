@@ -24,12 +24,14 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         remindersTableView.dataSource = dataSource
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        locationManager.requestLocation()
     }
     
     @IBAction func addReminder(_ sender: UIBarButtonItem) {
@@ -60,5 +62,14 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let reminder = dataSource.reminderAt(indexPath)
         presentDetailView(with: reminder, from: indexPath.row)
+    }
+}
+
+extension MasterViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        return
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

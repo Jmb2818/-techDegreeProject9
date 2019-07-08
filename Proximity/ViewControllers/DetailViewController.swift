@@ -148,3 +148,11 @@ extension DetailViewController: LocationDelegate {
         self.currentCoordinates = locationCoordinate
     }
 }
+
+extension DetailViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
