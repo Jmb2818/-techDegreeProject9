@@ -24,6 +24,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.requestAlwaysAuthorization()
         remindersTableView.dataSource = dataSource
     }
     

@@ -35,7 +35,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
         setupRefreshButton()
         setupGestures()
         setupSearch()

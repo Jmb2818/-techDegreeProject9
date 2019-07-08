@@ -43,5 +43,12 @@ extension Reminder {
         reminder.isChecked = model.isChecked
         reminder.reminder = model.reminder
         reminder.locationLabel = model.locationLabel
+        if let latitudeNumber = model.latitude,
+            let longitudeNumber = model.longitude {
+            let latitude = NSNumber(value: latitudeNumber)
+            let longitude = NSNumber(value: longitudeNumber)
+            reminder.latitude = latitude
+            reminder.longitude = longitude
+        }
     }
 }
