@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     
     private weak var mapView: MapViewController!
+    private var currentCoordinates: CLLocationCoordinate2D?
     
     var reminder: Reminder?
     var model: ReminderModel?
@@ -31,6 +32,11 @@ class DetailViewController: UIViewController {
         setupNavigationBar()
         setupViewForModel()
         formatSubViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupLocationCoordinates()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,7 +60,11 @@ class DetailViewController: UIViewController {
         }
         
         guard let reminder = reminder else {
-            let model = ReminderModel(reminder: textField.text ?? "", isChecked: false, locationLabel: locationLabel.text)
+            let model = ReminderModel(reminder: textField.text ?? "",
+                                      isChecked: false,
+                                      locationLabel: locationLabel.text,
+                                      latitude: currentCoordinates?.latitude,
+                                      longitude: currentCoordinates?.longitude)
             Reminder.with(model, in: coreDataStack.managedObjectContext)
             return
         }
@@ -63,6 +73,11 @@ class DetailViewController: UIViewController {
         reminder.setValue(textField.text, forKey: "reminder")
         if let location = locationLabel.text {
             reminder.setValue(location, forKey: "locationLabel")
+        }
+        if let longitude = currentCoordinates?.longitude,
+            let latitude = currentCoordinates?.latitude {
+            reminder.setValue(longitude, forKey: "longitude")
+            reminder.setValue(latitude, forKey: "latitude")
         }
     }
     
@@ -99,6 +114,18 @@ private extension DetailViewController {
         }
     }
     
+    func setupLocationCoordinates() {
+        guard let reminder = reminder,
+            let longitudeNumber = reminder.longitude,
+            let latitudeNumber = reminder.latitude,
+            let longitude = CLLocationDegrees(exactly: longitudeNumber),
+            let latitude = CLLocationDegrees(exactly: latitudeNumber) else {
+            return
+        }
+        self.currentCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        mapView.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
     func formatSubViews() {
         // Round the reminderView everything is held in
         reminderView.layer.masksToBounds = false
@@ -116,7 +143,8 @@ private extension DetailViewController {
 }
 
 extension DetailViewController: LocationDelegate {
-    func locationSelected(locationString: String?) {
+    func locationSelected(locationString: String?, locationCoordinate: CLLocationCoordinate2D?) {
         self.locationLabel.text = locationString
+        self.currentCoordinates = locationCoordinate
     }
 }

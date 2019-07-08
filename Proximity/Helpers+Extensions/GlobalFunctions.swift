@@ -19,7 +19,6 @@ func isEven(_ int: Int) -> Bool {
     return false
 }
 
-// TODO: Move into MapViewController
 func format(_ placemark: MKPlacemark) -> String {
     var locationString = ""
     let city = placemark.locality ?? ""

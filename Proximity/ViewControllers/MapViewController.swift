@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol LocationDelegate: class {
-    func locationSelected(locationString: String?)
+    func locationSelected(locationString: String?, locationCoordinate: CLLocationCoordinate2D?)
 }
 
 class MapViewController: UIViewController {
@@ -25,7 +25,12 @@ class MapViewController: UIViewController {
     private let annotation = MKPointAnnotation()
     private let geoCoder = CLGeocoder()
     weak var locationDelegate: LocationDelegate?
+    var coordinate: CLLocationCoordinate2D?
     var searchResultsController: UISearchController?
+    
+    private var hasSavedLocation: Bool {
+        return coordinate != nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +44,11 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        focusOnCurrentLocation()
+        if hasSavedLocation {
+            focusOnSavedLocation()
+        } else {
+           focusOnCurrentLocation()
+        }
     }
     
     func setupSearch() {
@@ -86,6 +95,22 @@ class MapViewController: UIViewController {
         }
     }
     
+    func focusOnSavedLocation() {
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways  {
+            guard let savedLocation = coordinate else {
+                return
+            }
+            
+            let coordinateRegion = MKCoordinateRegion(center: savedLocation,
+                                                      latitudinalMeters: regionRadius,
+                                                      longitudinalMeters: regionRadius)
+            
+            mapView.setRegion(coordinateRegion, animated: true)
+            addAnnotationAndOverlayFor(savedLocation)
+        }
+    }
+    
     func setupRefreshButton() {
         refreshLocationButton.layer.masksToBounds = false
         refreshLocationButton.layer.cornerRadius = 0.5 * refreshLocationButton.bounds.size.width
@@ -126,7 +151,7 @@ class MapViewController: UIViewController {
             
             if let location = placemarks?.first {
                 let locationString = format(location)
-                self?.locationDelegate?.locationSelected(locationString: locationString)
+                self?.locationDelegate?.locationSelected(locationString: locationString, locationCoordinate: location.location?.coordinate)
             }
         }
     }
@@ -179,6 +204,6 @@ extension MapViewController: SearchLocationDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
         let locationString = formatWithName(placemark)
         addAnnotationAndOverlayFor(location.coordinate)
-        locationDelegate?.locationSelected(locationString: locationString)
+        locationDelegate?.locationSelected(locationString: locationString, locationCoordinate: location.coordinate)
     }
 }

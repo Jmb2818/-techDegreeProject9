@@ -25,6 +25,8 @@ extension Reminder {
     @NSManaged public var reminder: String
     @NSManaged public var isChecked: Bool
     @NSManaged public var locationLabel: String?
+    @NSManaged public var longitude: NSNumber?
+    @NSManaged public var latitude: NSNumber?
 }
 
 extension Reminder {

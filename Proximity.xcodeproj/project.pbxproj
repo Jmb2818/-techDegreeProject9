@@ -87,7 +87,7 @@
 		0BA3F0CF22C32DF9008AE56B /* Proximity */ = {
 			isa = PBXGroup;
 			children = (
-				0BC4B9F922CB0629005748FE /* Helper */,
+				0BC4B9F922CB0629005748FE /* Helpers+Extensions */,
 				0BC4B9F622C93D10005748FE /* DataSources */,
 				0BC4B9F522C93CFF005748FE /* Storyboards */,
 				0BC4B9F422C93CDD005748FE /* CoreData */,
@@ -145,12 +145,12 @@
 			path = DataSources;
 			sourceTree = "<group>";
 		};
-		0BC4B9F922CB0629005748FE /* Helper */ = {
+		0BC4B9F922CB0629005748FE /* Helpers+Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */,
 			);
-			path = Helper;
+			path = "Helpers+Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
