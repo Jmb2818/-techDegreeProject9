@@ -20,7 +20,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var refreshLocationButton: UIButton!
     
     // MARK: Properties
-    weak var locationManager: CLLocationManager?
+    private let locationManager = CLLocationManager()
     private let regionRadius: CLLocationDistance = 1000
     private let annotation = MKPointAnnotation()
     private let geoCoder = CLGeocoder()
@@ -34,7 +34,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager?.delegate = self
+        locationManager.delegate = self
         setupRefreshButton()
         setupGestures()
         setupSearch()
@@ -43,11 +43,7 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if hasSavedLocation {
-            focusOnSavedLocation()
-        } else {
-           focusOnCurrentLocation()
-        }
+        focusOnLocation()
     }
     
     func setupSearch() {
@@ -76,13 +72,21 @@ class MapViewController: UIViewController {
         focusOnCurrentLocation()
     }
     
+    func focusOnLocation() {
+        if hasSavedLocation {
+            focusOnSavedLocation()
+        } else {
+            focusOnCurrentLocation()
+        }
+    }
+    
     
     /// Funcion to zoom in on users current location if permission has been given
     func focusOnCurrentLocation() {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways  {
-            guard let currentLocation = locationManager?.location else {
-                locationManager?.requestLocation()
+            guard let currentLocation = locationManager.location else {
+                locationManager.requestLocation()
                 return
             }
             
@@ -183,7 +187,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            focusOnCurrentLocation()
+            focusOnLocation()
         default:
             break
         }

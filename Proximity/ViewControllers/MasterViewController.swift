@@ -53,8 +53,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
             controller.model = ReminderModel(reminder: "", isChecked: false)
             controller.row = row
         }
-        
-        controller.locationManager = locationManager
+    
         controller.coreDataStack = coreDataStack
         show(controller, sender: nil)
     }
