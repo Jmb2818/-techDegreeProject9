@@ -67,6 +67,14 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         }
         context.saveChanges()
     }
+    
+    var isRemindersEmpty: Bool {
+        return fetchedResultsController.fetchedObjects?.isEmpty ?? true
+    }
+    
+    var reminders: [Reminder] {
+        return fetchedResultsController.fetchedObjects ?? []
+    }
 }
 
 // MARK: NSFetchedResultsControllerDelegate Conformance

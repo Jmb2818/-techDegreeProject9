@@ -27,6 +27,7 @@ extension Reminder {
     @NSManaged public var locationLabel: String?
     @NSManaged public var longitude: NSNumber?
     @NSManaged public var latitude: NSNumber?
+    @NSManaged public var identifier: String
 }
 
 extension Reminder {
@@ -42,6 +43,7 @@ extension Reminder {
         reminder.creationDate = Date()
         reminder.isChecked = model.isChecked
         reminder.reminder = model.reminder
+        reminder.identifier = UUID().uuidString
         reminder.locationLabel = model.locationLabel
         if let latitudeNumber = model.latitude,
             let longitudeNumber = model.longitude {
