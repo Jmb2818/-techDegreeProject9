@@ -56,7 +56,7 @@ extension LocationSearchTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
         let selectedLocation = matchingLocations[indexPath.row].placemark
         cell.textLabel?.text = selectedLocation.name
-        cell.detailTextLabel?.text = format(selectedLocation)
+        cell.detailTextLabel?.text = MapFormatter.format(selectedLocation)
         return cell
     }
     

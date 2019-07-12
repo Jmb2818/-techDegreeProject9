@@ -113,6 +113,16 @@ private extension DetailViewController {
         }
     }
     
+    func isEven(_ int: Int) -> Bool {
+        if int == 0 {
+            return true
+        }
+        if int % 2 == 0 {
+            return true
+        }
+        return false
+    }
+    
     func setupLocationCoordinates() {
         guard let reminder = reminder,
             let longitudeNumber = reminder.longitude,

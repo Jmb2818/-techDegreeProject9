@@ -153,7 +153,7 @@ class MapViewController: UIViewController {
             }
             
             if let location = placemarks?.first {
-                let locationString = format(location)
+                let locationString = MapFormatter.format(location)
                 self?.locationDelegate?.locationSelected(locationString: locationString, locationCoordinate: location.location?.coordinate)
             }
         }
@@ -205,7 +205,7 @@ extension MapViewController: SearchLocationDelegate {
                                                   longitudinalMeters: regionRadius)
         
         mapView.setRegion(coordinateRegion, animated: true)
-        let locationString = formatWithName(placemark)
+        let locationString = MapFormatter.formatWithName(placemark)
         addAnnotationAndOverlayFor(location.coordinate)
         locationDelegate?.locationSelected(locationString: locationString, locationCoordinate: location.coordinate)
     }
