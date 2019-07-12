@@ -11,12 +11,14 @@ import CoreData
 import MapKit
 import UserNotifications
 
-class MasterViewController: UIViewController, UITableViewDelegate {
+class MasterViewController: UIViewController {
     
+    // MARK: IBOutlets
     @IBOutlet weak var remindersTableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
-    var coreDataStack = CoreDataStack()
+    // MARK: Properties
+    private let coreDataStack = CoreDataStack()
     private let locationManager = CLLocationManager()
     lazy var dataSource: ReminderTableViewDataSource = {
         let request: NSFetchRequest<Reminder> = Reminder.fetchRequest()
@@ -37,11 +39,22 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         monitorReminders()
     }
     
+    // MARK: IBActions
     @IBAction func addReminder(_ sender: UIBarButtonItem) {
         presentDetailView(with: nil)
     }
+}
+
+// MARK: Private Extension of Helper Functions
+private extension MasterViewController {
     
-    private func presentDetailView(with reminder: Reminder?, from row: Int = 0) {
+    /// A function to add observers for when the core data context updates
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(monitorReminders), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: coreDataStack.managedObjectContext)
+    }
+    
+    /// A function to present the detail view to edit a reminder and will get the reminder passed to it
+    func presentDetailView(with reminder: Reminder?, from row: Int = 0) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let controller = storyBoard.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController else {
             return
@@ -56,16 +69,33 @@ class MasterViewController: UIViewController, UITableViewDelegate {
             controller.model = ReminderModel(reminder: "", isChecked: false)
             controller.row = row
         }
-    
+        
         controller.coreDataStack = coreDataStack
         show(controller, sender: nil)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let reminder = dataSource.reminderAt(indexPath)
-        presentDetailView(with: reminder, from: indexPath.row)
+    /// A function to call to handle the notification from a region entry or exit
+    /// Handles both if the app is active or backgrounded
+    func handleNotificationFor(_ reminderIdentifier: String) {
+        let reminderText = dataSource.textForReminderWith(reminderIdentifier)
+        if UIApplication.shared.applicationState == .active {
+            showAlert(title: "Reminder", message: reminderText)
+        } else {
+            let content = UNMutableNotificationContent()
+            content.body = reminderText
+            content.title = "Don't Forget!!"
+            content.sound = UNNotificationSound.default
+            content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber.advanced(by: 1))
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: reminderIdentifier, content: content, trigger: trigger)
+            let notificationCenter = UNUserNotificationCenter.current()
+            // TODO: Maybe handle error in the completion handler
+            notificationCenter.add(request, withCompletionHandler: nil)
+            notificationCenter.delegate = self
+        }
     }
     
+    /// A function to create a CLCircularRegion from a reminder with a radius of 100 m
     func createGeoRegionWith(_ reminder: Reminder) -> CLCircularRegion? {
         if let latitudeNumber = reminder.latitude,
             let longitudeNumber = reminder.longitude,
@@ -80,10 +110,21 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         return nil
     }
     
-    func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(monitorReminders), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: coreDataStack.managedObjectContext)
+    /// A function to start monitoring a region associated with the reminder
+    func startMonitoring(_ reminder: Reminder) {
+        if let region = createGeoRegionWith(reminder) {
+            locationManager.startMonitoring(for: region)
+        }
     }
     
+    /// A function to stop monitoring a region associated with the reminder
+    func stopMonitoring(_ reminder: Reminder) {
+        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
+            locationManager.stopMonitoring(for: region)
+        }
+    }
+    
+    /// A function to check to make sure monitoring is allowed and then set it up off of the reminders
     @objc func monitorReminders() {
         guard CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) else {
             // TODO: Throw an error that geo location is not allowed
@@ -108,44 +149,24 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    func startMonitoring(_ reminder: Reminder) {
-        if let region = createGeoRegionWith(reminder) {
-            locationManager.startMonitoring(for: region)
-        }
-    }
+}
+
+// MARK: UITableViewDelegate Conformance
+extension MasterViewController: UITableViewDelegate {
     
-    func stopMonitoring(_ reminder: Reminder) {
-        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
-            locationManager.stopMonitoring(for: region)
-        }
-    }
-    
-    func handleNotificationFor(_ reminderIdentifier: String) {
-        let reminderText = dataSource.textForReminderWith(reminderIdentifier)
-        if UIApplication.shared.applicationState == .active {
-           showAlert(title: "Reminder", message: reminderText)
-        } else {
-            let content = UNMutableNotificationContent()
-            content.body = reminderText
-            content.title = "Don't Forget!!"
-            content.sound = UNNotificationSound.default
-            content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber.advanced(by: 1))
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: reminderIdentifier, content: content, trigger: trigger)
-            let notificationCenter = UNUserNotificationCenter.current()
-            // TODO: Maybe handle error in the completion handler
-            notificationCenter.add(request, withCompletionHandler: nil)
-            notificationCenter.delegate = self
-        }
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reminder = dataSource.reminderAt(indexPath)
+        presentDetailView(with: reminder, from: indexPath.row)
     }
 }
 
+// MARK: CLLocationManagerDelegate
 extension MasterViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         return
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // TODO: Handle Errors Here
         print(error)
     }
     
@@ -162,6 +183,7 @@ extension MasterViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: UNUserNotificationCenterDelegate Conformance
 extension MasterViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // TODO: Check off event I think
