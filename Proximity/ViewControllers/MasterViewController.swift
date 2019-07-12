@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MapKit
+import UserNotifications
 
 class MasterViewController: UIViewController, UITableViewDelegate {
     
@@ -27,6 +28,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         remindersTableView.dataSource = dataSource
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +122,22 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     
     func handleNotificationFor(_ reminderIdentifier: String) {
         let reminderText = dataSource.textForReminderWith(reminderIdentifier)
-        print(reminderText)
+        if UIApplication.shared.applicationState == .active {
+           showAlert(title: "Reminder", message: reminderText)
+        } else {
+            let content = UNMutableNotificationContent()
+            content.body = reminderText
+            content.title = "Don't Forget!!"
+            content.sound = UNNotificationSound.default
+            content.badge = 1
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: reminderIdentifier, content: content, trigger: trigger)
+            let notificationCenter = UNUserNotificationCenter.current()
+            // TODO: Maybe handle error in the completion handler
+            notificationCenter.add(request, withCompletionHandler: nil)
+            notificationCenter.delegate = self
+        }
+        
     }
 }
 
@@ -142,5 +159,15 @@ extension MasterViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
        handleNotificationFor(region.identifier)
+    }
+}
+
+extension MasterViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("UserSelectedEvent")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
     }
 }
