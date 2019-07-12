@@ -16,7 +16,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     var coreDataStack = CoreDataStack()
-    private let locationManager = CLLocationManager()
+    private var locationManager: CLLocationManager?
     lazy var dataSource: ReminderTableViewDataSource = {
         let request: NSFetchRequest<Reminder> = Reminder.fetchRequest()
         return ReminderTableViewDataSource(fetchRequest: request, managedObjectContext: self.coreDataStack.managedObjectContext, tableView: self.remindersTableView)
@@ -24,14 +24,16 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        self.locationManager = (UIApplication.shared.delegate as? AppDelegate)?.locationManager
+        locationManager?.delegate = self
+        locationManager?.requestAlwaysAuthorization()
         remindersTableView.dataSource = dataSource
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.requestLocation()
+        locationManager?.requestLocation()
+//        monitorReminders()
     }
     
     @IBAction func addReminder(_ sender: UIBarButtonItem) {
@@ -62,6 +64,60 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         let reminder = dataSource.reminderAt(indexPath)
         presentDetailView(with: reminder, from: indexPath.row)
     }
+    
+    func createGeoRegionWith(_ reminder: Reminder) -> CLCircularRegion? {
+        if let latitudeNumber = reminder.latitude,
+            let longitudeNumber = reminder.longitude,
+            let latitude = CLLocationDegrees(exactly: latitudeNumber),
+            let longitude = CLLocationDegrees(exactly: longitudeNumber) {
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let region = CLCircularRegion(center: coordinate, radius: 75.0, identifier: reminder.identifier)
+            region.notifyOnEntry = true
+            region.notifyOnExit = true
+            return region
+        }
+        return nil
+    }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(monitorReminders), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: coreDataStack.managedObjectContext)
+    }
+    
+    @objc func monitorReminders() {
+        guard CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) else {
+            // TODO: Throw an error that geo location is not allowed
+            print("Monitoring is not available")
+            return
+        }
+        guard CLLocationManager.authorizationStatus() == .authorizedAlways else {
+            // TODO: Throw an error that you need to authorize always from settings
+            print("Need to authorize always")
+            return
+        }
+        
+        let reminders = dataSource.reminders
+        reminders.forEach {
+            if !$0.isChecked {
+                startMonitoring($0)
+            }
+            
+            if $0.isChecked {
+                stopMonitoring($0)
+            }
+        }
+    }
+    
+    func startMonitoring(_ reminder: Reminder) {
+        if let region = createGeoRegionWith(reminder) {
+            locationManager?.startMonitoring(for: region)
+        }
+    }
+    
+    func stopMonitoring(_ reminder: Reminder) {
+        if let region = locationManager?.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
+            locationManager?.stopMonitoring(for: region)
+        }
+    }
 }
 
 extension MasterViewController: CLLocationManagerDelegate {
@@ -69,6 +125,10 @@ extension MasterViewController: CLLocationManagerDelegate {
         return
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print(error)
     }
 }
