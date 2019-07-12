@@ -129,7 +129,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
             content.body = reminderText
             content.title = "Don't Forget!!"
             content.sound = UNNotificationSound.default
-            content.badge = 1
+            content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber.advanced(by: 1))
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             let request = UNNotificationRequest(identifier: reminderIdentifier, content: content, trigger: trigger)
             let notificationCenter = UNUserNotificationCenter.current()
@@ -164,6 +164,7 @@ extension MasterViewController: CLLocationManagerDelegate {
 
 extension MasterViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // TODO: Check off event I think
         print("UserSelectedEvent")
     }
     
