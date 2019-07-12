@@ -21,6 +21,7 @@
 		0BA3F0E522C32F3E008AE56B /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */; };
 		0BA3F0E722C44A15008AE56B /* ReminderTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */; };
 		0BA3F0EB22C4506C008AE56B /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */; };
+		0BA4AAC422D82F4D00888B39 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA4AAC322D82F4D00888B39 /* UIViewController+Extension.swift */; };
 		0BC4B9F822CA787D005748FE /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */; };
 		0BC4B9FB22CB063D005748FE /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,10 @@
 		0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewDataSource.swift; sourceTree = "<group>"; };
 		0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
+		0BA4AAC022D814DE00888B39 /* Locations.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Locations.gpx; sourceTree = "<group>"; };
+		0BA4AAC122D8175200888B39 /* Apple.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Apple.gpx; sourceTree = "<group>"; };
+		0BA4AAC222D8176100888B39 /* Google.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Google.gpx; sourceTree = "<group>"; };
+		0BA4AAC322D82F4D00888B39 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,8 +100,11 @@
 				0BC4B9F222C93C80005748FE /* Cells */,
 				0B640C5422C939AE00525302 /* ViewControllers */,
 				0BA3F0D022C32DF9008AE56B /* AppDelegate.swift */,
+				0BA4AAC022D814DE00888B39 /* Locations.gpx */,
 				0BA3F0D722C32DFD008AE56B /* Assets.xcassets */,
 				0BA3F0DC22C32DFD008AE56B /* Info.plist */,
+				0BA4AAC122D8175200888B39 /* Apple.gpx */,
+				0BA4AAC222D8176100888B39 /* Google.gpx */,
 			);
 			path = Proximity;
 			sourceTree = "<group>";
@@ -149,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				0BC4B9FA22CB063D005748FE /* GlobalFunctions.swift */,
+				0BA4AAC322D82F4D00888B39 /* UIViewController+Extension.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 				0B640C4F22C6FD2E00525302 /* RemindersFetchedResultsController.swift in Sources */,
 				0BA3F0E522C32F3E008AE56B /* MasterViewController.swift in Sources */,
 				0BA3F0E722C44A15008AE56B /* ReminderTableViewDataSource.swift in Sources */,
+				0BA4AAC422D82F4D00888B39 /* UIViewController+Extension.swift in Sources */,
 				0BC4B9F822CA787D005748FE /* LocationSearchTableViewController.swift in Sources */,
 				0B640C4622C5CA1000525302 /* ReminderModel.swift in Sources */,
 				0BA3F0D122C32DF9008AE56B /* AppDelegate.swift in Sources */,

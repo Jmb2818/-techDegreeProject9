@@ -19,6 +19,10 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
+    var reminders: [Reminder] {
+        return fetchedResultsController.fetchedObjects ?? []
+    }
+    
     // MARK: Initializers
     init(fetchRequest: NSFetchRequest<Reminder>, managedObjectContext context: NSManagedObjectContext, tableView: UITableView) {
         self.tableView = tableView
@@ -68,12 +72,13 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         context.saveChanges()
     }
     
-    var isRemindersEmpty: Bool {
-        return fetchedResultsController.fetchedObjects?.isEmpty ?? true
-    }
-    
-    var reminders: [Reminder] {
-        return fetchedResultsController.fetchedObjects ?? []
+    func textForReminderWith(_ identifier: String) -> String {
+        if let reminders = fetchedResultsController.fetchedObjects,
+            let selectedReminder = reminders.first(where: { $0.identifier == identifier }){
+            return selectedReminder.reminder
+        } else {
+            return ""
+        }
     }
 }
 

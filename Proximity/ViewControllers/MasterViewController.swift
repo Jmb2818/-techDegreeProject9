@@ -16,7 +16,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     var coreDataStack = CoreDataStack()
-    private var locationManager: CLLocationManager?
+    private let locationManager = CLLocationManager()
     lazy var dataSource: ReminderTableViewDataSource = {
         let request: NSFetchRequest<Reminder> = Reminder.fetchRequest()
         return ReminderTableViewDataSource(fetchRequest: request, managedObjectContext: self.coreDataStack.managedObjectContext, tableView: self.remindersTableView)
@@ -24,16 +24,15 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.locationManager = (UIApplication.shared.delegate as? AppDelegate)?.locationManager
-        locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
         remindersTableView.dataSource = dataSource
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager?.requestLocation()
-//        monitorReminders()
+        locationManager.requestLocation()
+        monitorReminders()
     }
     
     @IBAction func addReminder(_ sender: UIBarButtonItem) {
@@ -71,7 +70,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
             let latitude = CLLocationDegrees(exactly: latitudeNumber),
             let longitude = CLLocationDegrees(exactly: longitudeNumber) {
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let region = CLCircularRegion(center: coordinate, radius: 75.0, identifier: reminder.identifier)
+            let region = CLCircularRegion(center: coordinate, radius: 500.0, identifier: reminder.identifier)
             region.notifyOnEntry = true
             region.notifyOnExit = true
             return region
@@ -109,14 +108,19 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     
     func startMonitoring(_ reminder: Reminder) {
         if let region = createGeoRegionWith(reminder) {
-            locationManager?.startMonitoring(for: region)
+            locationManager.startMonitoring(for: region)
         }
     }
     
     func stopMonitoring(_ reminder: Reminder) {
-        if let region = locationManager?.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
-            locationManager?.stopMonitoring(for: region)
+        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
+            locationManager.stopMonitoring(for: region)
         }
+    }
+    
+    func handleNotificationFor(_ reminderIdentifier: String) {
+        let reminderText = dataSource.textForReminderWith(reminderIdentifier)
+        print(reminderText)
     }
 }
 
@@ -130,5 +134,13 @@ extension MasterViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        handleNotificationFor(region.identifier)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+       handleNotificationFor(region.identifier)
     }
 }

@@ -101,6 +101,7 @@ private extension DetailViewController {
             return
         }
         textField.text = model.reminder
+        textField.delegate = self
         reminderView.backgroundColor = isEven(row) ? #colorLiteral(red: 0.8980392157, green: 0.5450980392, blue: 0.5333333333, alpha: 1) : #colorLiteral(red: 0.9254901961, green: 0.7450980392, blue: 0.4784313725, alpha: 1)
         
         if let location = model.locationLabel {
