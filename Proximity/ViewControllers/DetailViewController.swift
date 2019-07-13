@@ -16,6 +16,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var selectLocationLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var onEntryButton: UIButton!
+    @IBOutlet weak var onExitButton: UIButton!
+    
     
     private weak var mapView: MapViewController!
     private var currentCoordinates: CLLocationCoordinate2D?
@@ -31,6 +34,7 @@ class DetailViewController: UIViewController {
         setupNavigationBar()
         setupViewForModel()
         formatSubViews()
+        formatViewButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,6 +152,36 @@ private extension DetailViewController {
         // Round the containerView
         mapContainerView.layer.cornerRadius = 20
         mapContainerView.layer.masksToBounds = true
+    }
+    
+    func formatViewButtons() {
+        onExitButton.layer.masksToBounds = false
+        onExitButton.layer.cornerRadius = 5
+        onExitButton.layer.borderWidth = 0
+        onExitButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        onExitButton.layer.shadowRadius = 2
+        onExitButton.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        onExitButton.layer.shadowOpacity = 1
+        onExitButton.clipsToBounds = false
+        onEntryButton.layer.masksToBounds = false
+        onEntryButton.layer.cornerRadius = 5
+        onEntryButton.layer.borderWidth = 0
+        onEntryButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        onEntryButton.layer.shadowRadius = 2
+        onEntryButton.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        onEntryButton.layer.shadowOpacity = 1
+        onEntryButton.clipsToBounds = false
+    }
+    
+    
+    @IBAction func selectedButton(_ sender: UIButton) {
+        formatViewButtons()
+        sender.isSelected = true
+        sender.layer.shadowOffset = CGSize.zero
+        sender.layer.shadowRadius = 0
+        sender.layer.shadowOpacity = 0
+        sender.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        sender.layer.borderWidth = 2.0
     }
 }
 
