@@ -131,9 +131,8 @@ class MapViewController: UIViewController {
             mapView.removeOverlays(overlays)
         }
         annotation.coordinate = coordinate
-        mapView?.addOverlay(MKCircle(center: coordinate, radius: 500.0))
+        mapView?.addOverlay(MKCircle(center: coordinate, radius: 100.0))
         mapView.addAnnotation(annotation)
-        
     }
     
     /// Add a pin to the map when user taps it

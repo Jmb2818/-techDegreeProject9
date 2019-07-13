@@ -102,7 +102,7 @@ private extension MasterViewController {
             let latitude = CLLocationDegrees(exactly: latitudeNumber),
             let longitude = CLLocationDegrees(exactly: longitudeNumber) {
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let region = CLCircularRegion(center: coordinate, radius: 500.0, identifier: reminder.identifier)
+            let region = CLCircularRegion(center: coordinate, radius: 100.0, identifier: reminder.identifier)
             region.notifyOnEntry = true
             region.notifyOnExit = true
             return region
