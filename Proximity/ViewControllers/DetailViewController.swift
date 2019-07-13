@@ -40,6 +40,7 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupLocationCoordinates()
+        selectedButton(onEntryButton)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
