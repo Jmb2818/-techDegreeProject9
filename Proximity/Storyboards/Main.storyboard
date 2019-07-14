@@ -134,7 +134,7 @@
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e19-FE-V24">
-                                        <rect key="frame" x="20" y="160.5" width="295" height="387.5"/>
+                                        <rect key="frame" x="20" y="170" width="295" height="378"/>
                                         <connections>
                                             <segue destination="Wha-bc-X8T" kind="embed" id="2P8-yH-Ne9"/>
                                         </connections>
@@ -146,7 +146,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wAl-Ij-Qvr">
-                                        <rect key="frame" x="10" y="105.5" width="315" height="40"/>
+                                        <rect key="frame" x="10" y="115" width="315" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Select A Location For The Reminder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-Lu-55D">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="22"/>
@@ -198,10 +198,18 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJD-Zt-wk0">
+                                        <rect key="frame" x="260" y="90.5" width="50" height="14.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="AtR-SD-NZv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="wAl-Ij-Qvr" firstAttribute="top" secondItem="AWr-DB-nbu" secondAttribute="bottom" constant="20" id="03t-iL-bM0"/>
                                     <constraint firstItem="wAl-Ij-Qvr" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="10" id="0F6-Oj-FV0"/>
                                     <constraint firstItem="gaQ-Nz-Brw" firstAttribute="top" secondItem="e19-FE-V24" secondAttribute="bottom" constant="10" id="45f-Yf-FGn"/>
                                     <constraint firstItem="jhS-DN-hOA" firstAttribute="leading" secondItem="e19-FE-V24" secondAttribute="leading" id="4Vy-hB-arA"/>
@@ -214,6 +222,9 @@
                                     <constraint firstItem="e19-FE-V24" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="PO2-hp-p2w"/>
                                     <constraint firstItem="gaQ-Nz-Brw" firstAttribute="trailing" secondItem="e19-FE-V24" secondAttribute="trailing" id="QzB-Wf-yLS"/>
                                     <constraint firstItem="AWr-DB-nbu" firstAttribute="top" secondItem="5qI-e8-QjX" secondAttribute="bottom" constant="15" id="Sj5-Nh-Xl0"/>
+                                    <constraint firstItem="aJD-Zt-wk0" firstAttribute="trailing" secondItem="AWr-DB-nbu" secondAttribute="trailing" id="VIx-20-TRY"/>
+                                    <constraint firstItem="aJD-Zt-wk0" firstAttribute="top" secondItem="AWr-DB-nbu" secondAttribute="bottom" constant="5" id="YmB-YW-5vC"/>
+                                    <constraint firstItem="wAl-Ij-Qvr" firstAttribute="top" secondItem="aJD-Zt-wk0" secondAttribute="bottom" constant="10" id="aJ3-S6-KVP"/>
                                     <constraint firstItem="5qI-e8-QjX" firstAttribute="top" secondItem="8dc-MX-ZmM" secondAttribute="top" constant="20" id="fcq-eh-G86"/>
                                     <constraint firstItem="e19-FE-V24" firstAttribute="top" secondItem="wAl-Ij-Qvr" secondAttribute="bottom" constant="15" id="gIA-gb-Cey"/>
                                     <constraint firstAttribute="trailing" secondItem="AWr-DB-nbu" secondAttribute="trailing" constant="25" id="l32-eB-3jY"/>
@@ -323,14 +334,14 @@
             <objects>
                 <viewController id="kk2-ug-3Lm" customClass="MapViewController" customModule="Proximity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mQ0-E0-fsc">
-                        <rect key="frame" x="0.0" y="0.0" width="295" height="387.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="295" height="378"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m3a-fm-HtJ">
-                                <rect key="frame" x="0.0" y="0.0" width="295" height="387.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="295" height="378"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aja-dv-sf4">
-                                <rect key="frame" x="215" y="307.5" width="65" height="65"/>
+                                <rect key="frame" x="215" y="298" width="65" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="2kL-Kk-3Qg"/>
