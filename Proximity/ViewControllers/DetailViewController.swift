@@ -40,7 +40,7 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupLocationCoordinates()
-        selectedButton(onEntryButton)
+        setupButtons()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,13 +67,15 @@ class DetailViewController: UIViewController {
                                       isChecked: false,
                                       locationLabel: locationLabel.text,
                                       latitude: currentCoordinates?.latitude,
-                                      longitude: currentCoordinates?.longitude)
+                                      longitude: currentCoordinates?.longitude,
+                                      isOnEntry: onEntryButton.isSelected)
             Reminder.with(model, in: coreDataStack.managedObjectContext)
             return
         }
         
         reminder.setValue(reminder.isChecked, forKey: "isChecked")
         reminder.setValue(textField.text, forKey: "reminder")
+        reminder.setValue(onEntryButton.isSelected, forKey: "isOnEntry")
         if let location = locationLabel.text {
             reminder.setValue(location, forKey: "locationLabel")
         }
@@ -92,6 +94,14 @@ class DetailViewController: UIViewController {
 }
 
 private extension DetailViewController {
+    func setupButtons() {
+        if let model = model, model.isOnEntry {
+            selectedButton(onEntryButton)
+        } else {
+            selectedButton(onExitButton)
+        }
+    }
+    
     func setupNavigationBar() {
         let backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelReminder))
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveReminder))
@@ -172,6 +182,8 @@ private extension DetailViewController {
         onEntryButton.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         onEntryButton.layer.shadowOpacity = 1
         onEntryButton.clipsToBounds = false
+        onEntryButton.isSelected = false
+        onExitButton.isSelected = false
     }
     
     

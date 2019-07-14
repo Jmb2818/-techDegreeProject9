@@ -128,7 +128,7 @@
                                 <rect key="frame" x="20" y="40" width="335" height="607"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AWr-DB-nbu">
-                                        <rect key="frame" x="10" y="55.5" width="315" height="30"/>
+                                        <rect key="frame" x="25" y="55.5" width="285" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -205,19 +205,19 @@
                                     <constraint firstItem="wAl-Ij-Qvr" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="10" id="0F6-Oj-FV0"/>
                                     <constraint firstItem="gaQ-Nz-Brw" firstAttribute="top" secondItem="e19-FE-V24" secondAttribute="bottom" constant="10" id="45f-Yf-FGn"/>
                                     <constraint firstItem="jhS-DN-hOA" firstAttribute="leading" secondItem="e19-FE-V24" secondAttribute="leading" id="4Vy-hB-arA"/>
-                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="trailing" secondItem="cDM-Lu-55D" secondAttribute="trailing" id="4pn-HQ-jV0"/>
                                     <constraint firstItem="AWr-DB-nbu" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="6po-xH-6Lj"/>
                                     <constraint firstItem="jhS-DN-hOA" firstAttribute="centerY" secondItem="gaQ-Nz-Brw" secondAttribute="centerY" id="Aaj-gL-z04"/>
                                     <constraint firstItem="gaQ-Nz-Brw" firstAttribute="leading" secondItem="jhS-DN-hOA" secondAttribute="trailing" constant="30" id="DDc-z4-5bn"/>
                                     <constraint firstAttribute="trailing" secondItem="e19-FE-V24" secondAttribute="trailing" constant="20" id="DFD-J5-87w"/>
                                     <constraint firstItem="5qI-e8-QjX" firstAttribute="centerX" secondItem="AWr-DB-nbu" secondAttribute="centerX" id="Dcx-bb-jwg"/>
                                     <constraint firstAttribute="trailing" secondItem="wAl-Ij-Qvr" secondAttribute="trailing" constant="10" id="GSu-uF-QwE"/>
-                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="leading" secondItem="cDM-Lu-55D" secondAttribute="leading" id="LGT-Cs-VIJ"/>
                                     <constraint firstItem="e19-FE-V24" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="PO2-hp-p2w"/>
                                     <constraint firstItem="gaQ-Nz-Brw" firstAttribute="trailing" secondItem="e19-FE-V24" secondAttribute="trailing" id="QzB-Wf-yLS"/>
                                     <constraint firstItem="AWr-DB-nbu" firstAttribute="top" secondItem="5qI-e8-QjX" secondAttribute="bottom" constant="15" id="Sj5-Nh-Xl0"/>
                                     <constraint firstItem="5qI-e8-QjX" firstAttribute="top" secondItem="8dc-MX-ZmM" secondAttribute="top" constant="20" id="fcq-eh-G86"/>
                                     <constraint firstItem="e19-FE-V24" firstAttribute="top" secondItem="wAl-Ij-Qvr" secondAttribute="bottom" constant="15" id="gIA-gb-Cey"/>
+                                    <constraint firstAttribute="trailing" secondItem="AWr-DB-nbu" secondAttribute="trailing" constant="25" id="l32-eB-3jY"/>
+                                    <constraint firstItem="AWr-DB-nbu" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="25" id="p2Y-gz-uXn"/>
                                     <constraint firstItem="e19-FE-V24" firstAttribute="leading" secondItem="8dc-MX-ZmM" secondAttribute="leading" constant="20" id="rHJ-ML-F1a"/>
                                     <constraint firstItem="wAl-Ij-Qvr" firstAttribute="centerX" secondItem="8dc-MX-ZmM" secondAttribute="centerX" id="rUS-Tg-TuN"/>
                                     <constraint firstAttribute="bottom" secondItem="gaQ-Nz-Brw" secondAttribute="bottom" constant="15" id="wof-l1-Hdu"/>
