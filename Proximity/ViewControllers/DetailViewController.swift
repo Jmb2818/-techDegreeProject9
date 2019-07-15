@@ -79,16 +79,16 @@ class DetailViewController: UIViewController {
             return
         }
         
-        reminder.setValue(reminder.isChecked, forKey: "isChecked")
-        reminder.setValue(textField.text, forKey: "reminder")
-        reminder.setValue(onEntryButton.isSelected, forKey: "isOnEntry")
+        reminder.setValue(reminder.isChecked, forKey: ReminderKey.isChecked.rawValue)
+        reminder.setValue(textField.text, forKey: ReminderKey.reminder.rawValue)
+        reminder.setValue(onEntryButton.isSelected, forKey: ReminderKey.isOnEntry.rawValue)
         if let location = locationLabel.text {
-            reminder.setValue(location, forKey: "locationLabel")
+            reminder.setValue(location, forKey: ReminderKey.locationLabel.rawValue)
         }
         if let longitude = currentCoordinates?.longitude,
             let latitude = currentCoordinates?.latitude {
-            reminder.setValue(longitude, forKey: "longitude")
-            reminder.setValue(latitude, forKey: "latitude")
+            reminder.setValue(longitude, forKey: ReminderKey.longitude.rawValue)
+            reminder.setValue(latitude, forKey: ReminderKey.latitude.rawValue)
         }
     }
     

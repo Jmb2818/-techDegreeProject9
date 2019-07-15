@@ -56,3 +56,14 @@ extension Reminder {
         }
     }
 }
+
+enum ReminderKey: String {
+    case creationDate
+    case reminder
+    case isChecked
+    case locationLabel
+    case longitude
+    case latitude
+    case identifier
+    case isOnEntry
+}

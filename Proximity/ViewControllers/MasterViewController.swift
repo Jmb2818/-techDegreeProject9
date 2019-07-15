@@ -177,6 +177,7 @@ extension MasterViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
+            // After authorization, request the location and monitor any existing reminder regions
             locationManager.requestLocation()
             monitorReminders()
         default:
