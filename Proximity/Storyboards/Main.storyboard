@@ -49,7 +49,7 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7Zh-t9-Kt7">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7Zh-t9-Kt7">
                                                                     <rect key="frame" x="0.0" y="38" width="150" height="18"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,9 +60,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="wuX-ns-FRb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="731-KN-C7I" secondAttribute="top" constant="10" id="Ou2-jm-Uz0"/>
                                                         <constraint firstAttribute="trailing" secondItem="wuX-ns-FRb" secondAttribute="trailing" constant="30" id="YYh-Nw-0qb"/>
                                                         <constraint firstItem="nyb-6z-pq6" firstAttribute="leading" secondItem="731-KN-C7I" secondAttribute="leading" constant="30" id="aZu-b9-YEf"/>
                                                         <constraint firstItem="wuX-ns-FRb" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="djW-8a-XVZ"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wuX-ns-FRb" secondAttribute="bottom" constant="10" id="jsu-MB-2cb"/>
                                                         <constraint firstAttribute="height" constant="100" id="lHH-4h-woW"/>
                                                         <constraint firstItem="nyb-6z-pq6" firstAttribute="centerY" secondItem="731-KN-C7I" secondAttribute="centerY" id="pdQ-qN-N5X"/>
                                                         <constraint firstItem="wuX-ns-FRb" firstAttribute="leading" secondItem="nyb-6z-pq6" secondAttribute="trailing" constant="30" id="q0T-zK-KtH"/>
@@ -132,6 +134,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange:" destination="Mrd-lp-FnO" eventType="editingChanged" id="Blc-qi-A2c"/>
+                                        </connections>
                                     </textField>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e19-FE-V24">
                                         <rect key="frame" x="20" y="170" width="295" height="378"/>
@@ -246,6 +251,7 @@
                         <viewLayoutGuide key="safeArea" id="k9a-m0-1cU"/>
                     </view>
                     <connections>
+                        <outlet property="charactersCountLabel" destination="aJD-Zt-wk0" id="MTi-t4-dh6"/>
                         <outlet property="locationLabel" destination="TnI-Pd-R9w" id="sYd-ik-jNf"/>
                         <outlet property="mapContainerView" destination="e19-FE-V24" id="UbG-4v-9fV"/>
                         <outlet property="onEntryButton" destination="fz5-5r-J0I" id="XAG-s1-dDF"/>

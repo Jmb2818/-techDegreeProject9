@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var onEntryButton: UIButton!
     @IBOutlet weak var onExitButton: UIButton!
+    @IBOutlet weak var charactersCountLabel: UILabel!
     
     
     private weak var mapView: MapViewController!
@@ -27,6 +28,10 @@ class DetailViewController: UIViewController {
     var model: ReminderModel?
     var coreDataStack: CoreDataStack?
     var row: Int?
+    
+    private var textFieldTextCount: Int {
+        return textField.text?.count ?? 0
+    }
     
     
     override func viewDidLoad() {
@@ -41,6 +46,7 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
         setupLocationCoordinates()
         setupButtons()
+        updateCount()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,6 +96,9 @@ class DetailViewController: UIViewController {
     
     @objc func cancelReminder() {
         navigationController?.popToRootViewController(animated: true)
+    }
+    @IBAction func textFieldDidChange(_ sender: UITextField) {
+        updateCount()
     }
 }
 
@@ -186,6 +195,16 @@ private extension DetailViewController {
         onExitButton.isSelected = false
     }
     
+    func updateCount() {
+        guard textField.text != "" else {
+            charactersCountLabel.text = "0/50"
+                return
+        }
+
+        let count = String(textFieldTextCount)
+        charactersCountLabel.text = [count, "/50"].joined()
+    }
+    
     
     @IBAction func selectedButton(_ sender: UIButton) {
         formatViewButtons()
@@ -210,5 +229,26 @@ extension DetailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        updateCount()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateCount()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            textField.resignFirstResponder()
+            return false
+        }
+        
+        if string == "" {
+            return true
+        }
+        
+        return textFieldTextCount <= 49
     }
 }
