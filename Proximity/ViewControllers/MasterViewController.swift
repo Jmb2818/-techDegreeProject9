@@ -36,8 +36,11 @@ class MasterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.requestLocation()
-        monitorReminders()
+        
+        if CLLocationManager.authorizationStatus() == .authorizedAlways {
+            locationManager.requestLocation()
+            monitorReminders()
+        }
     }
     
     // MARK: IBActions
@@ -88,7 +91,7 @@ private extension MasterViewController {
         } else {
             let content = UNMutableNotificationContent()
             content.body = reminderText
-            content.title = "Don't Forget!!"
+            content.title = "Don't Forget!"
             content.sound = UNNotificationSound.default
             content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber.advanced(by: 1))
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
@@ -107,7 +110,7 @@ private extension MasterViewController {
             let latitude = CLLocationDegrees(exactly: latitudeNumber),
             let longitude = CLLocationDegrees(exactly: longitudeNumber) {
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let region = CLCircularRegion(center: coordinate, radius: 1000.0, identifier: reminder.identifier)
+            let region = CLCircularRegion(center: coordinate, radius: 100.0, identifier: reminder.identifier)
             region.notifyOnEntry = reminder.isOnEntry
             region.notifyOnExit = !reminder.isOnEntry
             return region
@@ -133,12 +136,12 @@ private extension MasterViewController {
     @objc func monitorReminders() {
         guard CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) else {
             // TODO: Throw an error that geo location is not allowed
-            print("Monitoring is not available")
+            showAlertFor(ProximityError.needToAllowMonitoring)
             return
         }
         guard CLLocationManager.authorizationStatus() == .authorizedAlways else {
             // TODO: Throw an error that you need to authorize always from settings
-            print("Need to authorize always")
+            showAlertFor(ProximityError.needsLocationAuthorization)
             return
         }
         
@@ -170,13 +173,22 @@ extension MasterViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         return
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.requestLocation()
+            monitorReminders()
+        default:
+            break
+        }
+    }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // TODO: Handle Errors Here
-        print(error)
+        showAlertFor(ProximityError.locationError)
     }
     
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print(error)
+        showAlertFor(ProximityError.monitoringFailure)
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {

@@ -20,7 +20,7 @@ class RemindersFetchedResultsController: NSFetchedResultsController<Reminder> {
         do {
             try performFetch()
         } catch {
-            fatalError()
+            fatalError("Error performing fetch. Terminating App" )
         }
     }
 }

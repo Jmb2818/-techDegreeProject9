@@ -45,7 +45,7 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reminderCell", for: indexPath) as? ReminderCell else {
-            fatalError()
+            fatalError("Could not create a reminder cell. Terminating App")
         }
         
         let reminder = fetchedResultsController.object(at: indexPath)

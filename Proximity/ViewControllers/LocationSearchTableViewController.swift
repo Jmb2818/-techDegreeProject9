@@ -37,7 +37,7 @@ extension LocationSearchTableViewController: UISearchResultsUpdating {
         let search = MKLocalSearch(request: searchRequest)
         search.start { [weak self] response, error in
             guard let response = response else {
-                // TODO: Errors
+                self?.showAlertFor(ProximityError.searchFailure)
                 return
             }
             

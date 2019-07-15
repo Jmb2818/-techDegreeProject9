@@ -20,7 +20,7 @@ class CoreDataStack {
         let container = NSPersistentContainer(name: "Reminder")
         container.loadPersistentStores() { storeDescription, error in
             if let error = error as NSError? {
-                fatalError("Unresolved error: \(error), \(error.userInfo)")
+                fatalError("Persistance Container Error: Terminating app due to \(error), \(error.userInfo)")
             }
         }
         
@@ -34,7 +34,7 @@ extension NSManagedObjectContext {
         do {
             try save()
         } catch {
-            fatalError("Error: \(error.localizedDescription)")
+            fatalError("NSManagedObjectContext Error: Terminating app due to \(error.localizedDescription)")
         }
     }
 }

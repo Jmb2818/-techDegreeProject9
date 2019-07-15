@@ -133,7 +133,7 @@
                                         <rect key="frame" x="25" y="55.5" width="285" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                         <connections>
                                             <action selector="textFieldDidChange:" destination="Mrd-lp-FnO" eventType="editingChanged" id="Blc-qi-A2c"/>
                                         </connections>

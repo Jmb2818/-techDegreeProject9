@@ -92,11 +92,10 @@ class DetailViewController: UIViewController {
         }
     }
     
-    
-    
     @objc func cancelReminder() {
         navigationController?.popToRootViewController(animated: true)
     }
+    
     @IBAction func textFieldDidChange(_ sender: UITextField) {
         updateCount()
     }
@@ -122,6 +121,7 @@ private extension DetailViewController {
     
     func setupViewForModel() {
         guard let model = model, let row = row else {
+            showAlertFor(ProximityError.failureSettingUpView)
             return
         }
         textField.text = model.reminder
@@ -175,6 +175,7 @@ private extension DetailViewController {
     }
     
     func formatViewButtons() {
+        // TODO: Use an array
         onExitButton.layer.masksToBounds = false
         onExitButton.layer.cornerRadius = 5
         onExitButton.layer.borderWidth = 0
@@ -219,8 +220,9 @@ private extension DetailViewController {
 
 extension DetailViewController: LocationDelegate {
     func locationSelected(locationString: String?, locationCoordinate: CLLocationCoordinate2D?) {
-        self.locationLabel.text = locationString
-        self.currentCoordinates = locationCoordinate
+        selectLocationLabel.text = "Current Selected Location"
+        locationLabel.text = locationString
+        currentCoordinates = locationCoordinate
     }
 }
 
