@@ -64,7 +64,7 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         switch editingStyle {
         case .delete:
             let reminder = fetchedResultsController.object(at: indexPath)
-            controller?.stopMonitoring(reminder)
+            controller?.stopMonitoringDeletedReminder(reminder)
             context.delete(reminder)
             context.saveChanges()
         default:

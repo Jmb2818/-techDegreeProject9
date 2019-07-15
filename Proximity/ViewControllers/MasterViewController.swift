@@ -45,11 +45,8 @@ class MasterViewController: UIViewController {
         presentDetailView(with: nil)
     }
     
-    /// A function to stop monitoring a region associated with the reminder
-    func stopMonitoring(_ reminder: Reminder) {
-        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
-            locationManager.stopMonitoring(for: region)
-        }
+    func stopMonitoringDeletedReminder(_ reminder: Reminder) {
+        stopMonitoring(reminder)
     }
 }
 
@@ -122,6 +119,13 @@ private extension MasterViewController {
     func startMonitoring(_ reminder: Reminder) {
         if let region = createGeoRegionWith(reminder) {
             locationManager.startMonitoring(for: region)
+        }
+    }
+    
+    /// A function to stop monitoring a region associated with the reminder
+    func stopMonitoring(_ reminder: Reminder) {
+        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
+            locationManager.stopMonitoring(for: region)
         }
     }
     
