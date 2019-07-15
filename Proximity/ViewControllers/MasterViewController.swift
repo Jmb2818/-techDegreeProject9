@@ -30,6 +30,7 @@ class MasterViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         remindersTableView.dataSource = dataSource
+        dataSource.controller = self
         addObservers()
     }
     
@@ -42,6 +43,13 @@ class MasterViewController: UIViewController {
     // MARK: IBActions
     @IBAction func addReminder(_ sender: UIBarButtonItem) {
         presentDetailView(with: nil)
+    }
+    
+    /// A function to stop monitoring a region associated with the reminder
+    func stopMonitoring(_ reminder: Reminder) {
+        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
+            locationManager.stopMonitoring(for: region)
+        }
     }
 }
 
@@ -102,7 +110,7 @@ private extension MasterViewController {
             let latitude = CLLocationDegrees(exactly: latitudeNumber),
             let longitude = CLLocationDegrees(exactly: longitudeNumber) {
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let region = CLCircularRegion(center: coordinate, radius: 100.0, identifier: reminder.identifier)
+            let region = CLCircularRegion(center: coordinate, radius: 1000.0, identifier: reminder.identifier)
             region.notifyOnEntry = reminder.isOnEntry
             region.notifyOnExit = !reminder.isOnEntry
             return region
@@ -114,13 +122,6 @@ private extension MasterViewController {
     func startMonitoring(_ reminder: Reminder) {
         if let region = createGeoRegionWith(reminder) {
             locationManager.startMonitoring(for: region)
-        }
-    }
-    
-    /// A function to stop monitoring a region associated with the reminder
-    func stopMonitoring(_ reminder: Reminder) {
-        if let region = locationManager.monitoredRegions.first(where: { $0.identifier == reminder.identifier }) {
-            locationManager.stopMonitoring(for: region)
         }
     }
     

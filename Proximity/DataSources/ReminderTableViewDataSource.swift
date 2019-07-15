@@ -14,6 +14,7 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
     private let tableView: UITableView
     private let fetchedResultsController: RemindersFetchedResultsController
     private let context: NSManagedObjectContext
+    weak var controller: MasterViewController?
     
     var remindersCount: Int {
         return fetchedResultsController.fetchedObjects?.count ?? 0
@@ -53,6 +54,22 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         cell.checkedButton.tag = indexPath.row
         cell.checkedButton.addTarget(self, action: #selector(checkOffReminder), for: .touchUpInside)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            let reminder = fetchedResultsController.object(at: indexPath)
+            controller?.stopMonitoring(reminder)
+            context.delete(reminder)
+            context.saveChanges()
+        default:
+            break
+        }
     }
     
     // MARK: Helper Functions

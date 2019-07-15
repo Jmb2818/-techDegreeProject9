@@ -131,7 +131,7 @@ class MapViewController: UIViewController {
             mapView.removeOverlays(overlays)
         }
         annotation.coordinate = coordinate
-        mapView?.addOverlay(MKCircle(center: coordinate, radius: 100.0))
+        mapView?.addOverlay(MKCircle(center: coordinate, radius: 1000.0))
         mapView.addAnnotation(annotation)
     }
     
