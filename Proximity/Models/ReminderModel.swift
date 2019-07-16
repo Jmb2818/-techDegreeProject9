@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// A model for each reminder
 struct ReminderModel {
+    
+    // MARK: Properties
     let reminder: String
     let isChecked: Bool
     let locationLabel: String?
@@ -16,6 +19,7 @@ struct ReminderModel {
     let latitude: Double?
     let isOnEntry: Bool
     
+    // MARK: Initializers
     init(reminder: String, isChecked: Bool, locationLabel: String? = nil, latitude: Double? = nil, longitude: Double? = nil, isOnEntry: Bool = true) {
         self.reminder = reminder
         self.isChecked = isChecked

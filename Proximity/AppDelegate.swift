@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            // TODO: Handle the error
+            if let error = error {
+                fatalError("Error Requesting Authorization For Notifications: Terminating App due to \(error)")
+            }
         }
         return true
     }

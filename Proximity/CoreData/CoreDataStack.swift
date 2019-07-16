@@ -11,6 +11,7 @@ import CoreData
 
 /// Class for managing all of the main Core Data objects
 class CoreDataStack {
+    // MARK: Properties
     lazy var managedObjectContext: NSManagedObjectContext = {
         let container = self.persistentContainer
         return container.viewContext

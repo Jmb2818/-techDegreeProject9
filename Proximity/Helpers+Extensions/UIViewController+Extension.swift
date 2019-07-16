@@ -17,6 +17,7 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    /// Function to show alert of a ProximityError
     func showAlertFor(_ error: ProximityError) {
         showAlert(title: error.errorTitle, message: error.errorMessage)
     }

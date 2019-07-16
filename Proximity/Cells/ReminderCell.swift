@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// A class for the format of the cell of each reminder
 class ReminderCell: UITableViewCell {
     
+    // MARK: IBOutlets
     @IBOutlet weak var reminderView: UIView!
     @IBOutlet weak var reminderLabel: UILabel!
     @IBOutlet weak var checkedButton: UIButton!
@@ -17,16 +19,10 @@ class ReminderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        reminderView.layer.masksToBounds = false
-        reminderView.layer.cornerRadius = 20
-        reminderView.layer.shadowOffset = CGSize(width: 0, height: 4)
-        reminderView.layer.shadowRadius = 2
-        reminderView.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-        reminderView.layer.shadowOpacity = 1
-        reminderView.clipsToBounds = false
+        setupReminderView()
     }
 
+    // MARK: Configure Cell
     func configureAt(_ indexPath: IndexPath, withModel model: ReminderModel) {
         reminderView.backgroundColor = isEven(indexPath.row) ? #colorLiteral(red: 0.8980392157, green: 0.5450980392, blue: 0.5333333333, alpha: 1) : #colorLiteral(red: 0.9254901961, green: 0.7450980392, blue: 0.4784313725, alpha: 1)
         let image = model.isChecked ? #imageLiteral(resourceName: "filledCircle") : #imageLiteral(resourceName: "unfilledCircle")
@@ -39,6 +35,7 @@ class ReminderCell: UITableViewCell {
         }
     }
     
+    // MARK: Helper Functions
     private func isEven(_ int: Int) -> Bool {
         if int == 0 {
             return true
@@ -47,5 +44,15 @@ class ReminderCell: UITableViewCell {
             return true
         }
         return false
+    }
+    
+    private func setupReminderView() {
+        reminderView.layer.masksToBounds = false
+        reminderView.layer.cornerRadius = 20
+        reminderView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        reminderView.layer.shadowRadius = 2
+        reminderView.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        reminderView.layer.shadowOpacity = 1
+        reminderView.clipsToBounds = false
     }
 }

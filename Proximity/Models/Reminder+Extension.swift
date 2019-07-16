@@ -57,6 +57,7 @@ extension Reminder {
     }
 }
 
+/// An enum to hold the keys for the properties of a reminder
 enum ReminderKey: String {
     case creationDate
     case reminder

@@ -15,6 +15,7 @@
 		0B640C5122C712DC00525302 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B640C5022C712DC00525302 /* DetailViewController.swift */; };
 		0B640C5322C8C9D700525302 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B640C5222C8C9D700525302 /* MapViewController.swift */; };
 		0B83FBAB22DC149000FB22FA /* ProximityErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83FBAA22DC149000FB22FA /* ProximityErrors.swift */; };
+		0B83FBAE22DD659300FB22FA /* UserStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83FBAD22DD659300FB22FA /* UserStrings.swift */; };
 		0BA3F0D122C32DF9008AE56B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA3F0D022C32DF9008AE56B /* AppDelegate.swift */; };
 		0BA3F0D822C32DFD008AE56B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BA3F0D722C32DFD008AE56B /* Assets.xcassets */; };
 		0BA3F0DB22C32DFD008AE56B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BA3F0D922C32DFD008AE56B /* LaunchScreen.storyboard */; };
@@ -36,6 +37,7 @@
 		0B640C5022C712DC00525302 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0B640C5222C8C9D700525302 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0B83FBAA22DC149000FB22FA /* ProximityErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityErrors.swift; sourceTree = "<group>"; };
+		0B83FBAD22DD659300FB22FA /* UserStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStrings.swift; sourceTree = "<group>"; };
 		0BA3F0CD22C32DF9008AE56B /* Proximity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proximity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BA3F0D022C32DF9008AE56B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BA3F0D722C32DFD008AE56B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			children = (
 				0BA4AAC322D82F4D00888B39 /* UIViewController+Extension.swift */,
 				0BA4AAC522D904C700888B39 /* MapFormatter.swift */,
+				0B83FBAD22DD659300FB22FA /* UserStrings.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				0BA3F0E522C32F3E008AE56B /* MasterViewController.swift in Sources */,
 				0BA3F0E722C44A15008AE56B /* ReminderTableViewDataSource.swift in Sources */,
 				0BA4AAC422D82F4D00888B39 /* UIViewController+Extension.swift in Sources */,
+				0B83FBAE22DD659300FB22FA /* UserStrings.swift in Sources */,
 				0BC4B9F822CA787D005748FE /* LocationSearchTableViewController.swift in Sources */,
 				0B640C4622C5CA1000525302 /* ReminderModel.swift in Sources */,
 				0BA4AAC622D904C700888B39 /* MapFormatter.swift in Sources */,

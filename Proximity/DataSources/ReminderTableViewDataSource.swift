@@ -16,6 +16,7 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
     private let context: NSManagedObjectContext
     weak var controller: MasterViewController?
     
+    // MARK: Computed Vars
     var remindersCount: Int {
         return fetchedResultsController.fetchedObjects?.count ?? 0
     }
@@ -78,29 +79,33 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
         return fetchedResultsController.object(at: indexPath)
     }
     
+    /// A function to set the reminder as being checked or not depending on original state
     @objc func checkOffReminder(_ sender: UIButton) {
         let indexPath = IndexPath(row: sender.tag, section: 0)
         let reminder = reminderAt(indexPath)
         if reminder.isChecked {
-            reminder.setValue(false, forKey: "isChecked")
+            reminder.setValue(false, forKey: ReminderKey.isChecked.rawValue)
         } else {
-            reminder.setValue(true, forKey: "isChecked")
+            reminder.setValue(true, forKey: ReminderKey.isChecked.rawValue)
         }
         context.saveChanges()
     }
     
+    /// A function to return the reminder's reminder that matches the given identifier
     func textForReminderWith(_ identifier: String) -> String {
         if let selectedReminder = reminderWithIdentifierMatching(identifier){
             return selectedReminder.reminder
         } else {
-            return ""
+            return UserStrings.General.emptyString
         }
     }
     
+    /// A function to return a reminder if it exists that matches the given identifier
     func reminderWithIdentifierMatching(_ identifier: String) -> Reminder? {
         return reminders.first(where: { $0.identifier == identifier })
     }
 }
+
 
 // MARK: NSFetchedResultsControllerDelegate Conformance
 extension ReminderTableViewDataSource: NSFetchedResultsControllerDelegate {

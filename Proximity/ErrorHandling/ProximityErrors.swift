@@ -16,7 +16,9 @@ enum ProximityError: Error {
     case needsLocationAuthorization
     case needToAllowMonitoring
     case searchFailure
+    case notificationError
     
+    // Error Titles
     var errorTitle: String {
         switch self {
         case .locationError:
@@ -31,9 +33,12 @@ enum ProximityError: Error {
             return "Location Authorization Needed"
         case .searchFailure:
             return "Search Result Error"
+        case .notificationError:
+            return "Error Creating Notification"
         }
     }
     
+    // Error Messages
     var errorMessage: String {
         switch self {
         case .locationError:
@@ -48,6 +53,8 @@ enum ProximityError: Error {
             return "Please allow this app to always access your location"
         case .searchFailure:
             return "There was an error retrieving the search results. Please try again"
+        case .notificationError:
+            return "There was an issue creating this notification. Please try again"
         }
     }
 }

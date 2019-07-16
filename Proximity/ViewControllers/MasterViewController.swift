@@ -97,7 +97,6 @@ private extension MasterViewController {
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             let request = UNNotificationRequest(identifier: reminderIdentifier, content: content, trigger: trigger)
             let notificationCenter = UNUserNotificationCenter.current()
-            // TODO: Maybe handle error in the completion handler
             notificationCenter.add(request, withCompletionHandler: nil)
             notificationCenter.delegate = self
         }
@@ -202,7 +201,6 @@ extension MasterViewController: CLLocationManagerDelegate {
 // MARK: UNUserNotificationCenterDelegate Conformance
 extension MasterViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // TODO: Check off event I think
         let identifier = response.notification.request.identifier
         if let reminder = dataSource.reminderWithIdentifierMatching(identifier) {
             reminder.setValue(true, forKey: ReminderKey.isChecked.rawValue)
