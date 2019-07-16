@@ -15,6 +15,8 @@ class UserStrings {
         static let noCharacters = "0/50"
         static let someCharacters = "/50"
         static let emptyString = ""
+        static let selectedLocation = "Current Selected Location"
+        static let selectLocation = "Select A Location For The Reminder"
     }
     
     enum Error {

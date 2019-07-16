@@ -11,6 +11,7 @@ import MapKit
 
 class DetailViewController: UIViewController {
     
+    // MARK: IBOutlets
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var reminderView: UIView!
     @IBOutlet weak var textField: UITextField!
@@ -20,7 +21,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var onExitButton: UIButton!
     @IBOutlet weak var charactersCountLabel: UILabel!
     
-    
+    // MARK: Properties
     private weak var mapView: MapViewController!
     private var currentCoordinates: CLLocationCoordinate2D?
     var reminder: Reminder?
@@ -28,10 +29,10 @@ class DetailViewController: UIViewController {
     var coreDataStack: CoreDataStack?
     var row: Int?
     
+    // MARK: Computed Properties
     private var textFieldTextCount: Int {
         return textField.text?.count ?? 0
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,50 +58,24 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @objc func saveReminder() {
-        guard let coreDataStack = coreDataStack else {
-            return
-        }
-        
-        defer {
-            coreDataStack.managedObjectContext.saveChanges()
-            navigationController?.popToRootViewController(animated: true)
-        }
-        
-        guard let reminder = reminder else {
-            let model = ReminderModel(reminder: textField.text ?? "",
-                                      isChecked: false,
-                                      locationLabel: locationLabel.text,
-                                      latitude: currentCoordinates?.latitude,
-                                      longitude: currentCoordinates?.longitude,
-                                      isOnEntry: onEntryButton.isSelected)
-            Reminder.with(model, in: coreDataStack.managedObjectContext)
-            return
-        }
-        
-        reminder.setValue(reminder.isChecked, forKey: ReminderKey.isChecked.rawValue)
-        reminder.setValue(textField.text, forKey: ReminderKey.reminder.rawValue)
-        reminder.setValue(onEntryButton.isSelected, forKey: ReminderKey.isOnEntry.rawValue)
-        if let location = locationLabel.text {
-            reminder.setValue(location, forKey: ReminderKey.locationLabel.rawValue)
-        }
-        if let longitude = currentCoordinates?.longitude,
-            let latitude = currentCoordinates?.latitude {
-            reminder.setValue(longitude, forKey: ReminderKey.longitude.rawValue)
-            reminder.setValue(latitude, forKey: ReminderKey.latitude.rawValue)
-        }
-    }
-    
-    @objc func cancelReminder() {
-        navigationController?.popToRootViewController(animated: true)
-    }
-    
+    // MARK: IBActions
     @IBAction func textFieldDidChange(_ sender: UITextField) {
         updateCount()
+    }
+    
+    @IBAction func selectedButton(_ sender: UIButton) {
+        formatViewButtons()
+        sender.isSelected = true
+        sender.layer.shadowOffset = CGSize.zero
+        sender.layer.shadowRadius = 0
+        sender.layer.shadowOpacity = 0
+        sender.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        sender.layer.borderWidth = 2.0
     }
 }
 
 private extension DetailViewController {
+    // MARK: View Setup
     func setupButtons() {
         if let model = model, model.isOnEntry {
             selectedButton(onEntryButton)
@@ -127,11 +102,12 @@ private extension DetailViewController {
         textField.delegate = self
         reminderView.backgroundColor = isEven(row) ? #colorLiteral(red: 0.8980392157, green: 0.5450980392, blue: 0.5333333333, alpha: 1) : #colorLiteral(red: 0.9254901961, green: 0.7450980392, blue: 0.4784313725, alpha: 1)
         
+        // If there is a location setup the location label
         if let location = model.locationLabel {
-            selectLocationLabel.text = "Current Selected Location"
+            selectLocationLabel.text = UserStrings.General.selectedLocation
             locationLabel.text = location
         } else {
-            selectLocationLabel.text = "Select A Location For The Reminder"
+            selectLocationLabel.text = UserStrings.General.selectLocation
             locationLabel.text = nil
         }
     }
@@ -146,6 +122,7 @@ private extension DetailViewController {
         return false
     }
     
+    /// A function to show a reminder's area on the map if it exists
     func setupLocationCoordinates() {
         guard let reminder = reminder,
             let longitudeNumber = reminder.longitude,
@@ -174,6 +151,7 @@ private extension DetailViewController {
     }
     
     func formatViewButtons() {
+        // Round buttons for onEntry and onExit
         let onLocationButtons = [onExitButton, onEntryButton]
         onLocationButtons.forEach { button in
             button?.layer.masksToBounds = false
@@ -188,28 +166,63 @@ private extension DetailViewController {
         }
     }
     
+    // MARK: Helper Functions
+    /// A function to update the count of the characters for the textField
     func updateCount() {
-        guard textField.text != "" else {
-            charactersCountLabel.text = "0/50"
+        guard textField.text != UserStrings.General.emptyString else {
+            charactersCountLabel.text = UserStrings.General.noCharacters
                 return
         }
 
         let count = String(textFieldTextCount)
-        charactersCountLabel.text = [count, "/50"].joined()
+        charactersCountLabel.text = [count, UserStrings.General.someCharacters].joined()
     }
     
+    /// A function to save a reminder to core data
+    @objc func saveReminder() {
+        guard let coreDataStack = coreDataStack else {
+            return
+        }
+        
+        defer {
+            // Always save changes and dismiss the DetailViewController
+            coreDataStack.managedObjectContext.saveChanges()
+            navigationController?.popToRootViewController(animated: true)
+        }
+        
+        guard let reminder = reminder else {
+            // If there is no existing reminder then create one
+            let model = ReminderModel(reminder: textField.text ?? "",
+                                      isChecked: false,
+                                      locationLabel: locationLabel.text,
+                                      latitude: currentCoordinates?.latitude,
+                                      longitude: currentCoordinates?.longitude,
+                                      isOnEntry: onEntryButton.isSelected)
+            Reminder.with(model, in: coreDataStack.managedObjectContext)
+            return
+        }
+        
+        // Set all the values for the current reminder
+        reminder.setValue(reminder.isChecked, forKey: ReminderKey.isChecked.rawValue)
+        reminder.setValue(textField.text, forKey: ReminderKey.reminder.rawValue)
+        reminder.setValue(onEntryButton.isSelected, forKey: ReminderKey.isOnEntry.rawValue)
+        if let location = locationLabel.text {
+            reminder.setValue(location, forKey: ReminderKey.locationLabel.rawValue)
+        }
+        if let longitude = currentCoordinates?.longitude,
+            let latitude = currentCoordinates?.latitude {
+            reminder.setValue(longitude, forKey: ReminderKey.longitude.rawValue)
+            reminder.setValue(latitude, forKey: ReminderKey.latitude.rawValue)
+        }
+    }
     
-    @IBAction func selectedButton(_ sender: UIButton) {
-        formatViewButtons()
-        sender.isSelected = true
-        sender.layer.shadowOffset = CGSize.zero
-        sender.layer.shadowRadius = 0
-        sender.layer.shadowOpacity = 0
-        sender.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        sender.layer.borderWidth = 2.0
+    /// A function to dismiss the DetailViewController
+    @objc func cancelReminder() {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 
+// MARK: LocationDelegate Conformance
 extension DetailViewController: LocationDelegate {
     func locationSelected(locationString: String?, locationCoordinate: CLLocationCoordinate2D?) {
         selectLocationLabel.text = "Current Selected Location"
@@ -218,6 +231,7 @@ extension DetailViewController: LocationDelegate {
     }
 }
 
+// MARK: UITextFieldDelegate Conformance
 extension DetailViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -234,15 +248,17 @@ extension DetailViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == "\n" {
+        // If it is a line break then resign first responder
+        if string == UserStrings.General.lineBreak {
             textField.resignFirstResponder()
             return false
         }
         
-        if string == "" {
+        if string == UserStrings.General.emptyString {
             return true
         }
         
+        // Stop allowing entering of text at 50 characters
         return textFieldTextCount <= 49
     }
 }

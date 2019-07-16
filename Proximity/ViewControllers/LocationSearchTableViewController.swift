@@ -9,12 +9,14 @@
 import UIKit
 import MapKit
 
+/// A protocol to delegate back the select
 protocol SearchLocationDelegate: class {
     func searchResultSelected(placemark: MKPlacemark)
 }
 
 class LocationSearchTableViewController: UITableViewController {
     
+    // MARK: Properties
     private var matchingLocations: [MKMapItem] = []
     var mapView: MKMapView?
     weak var delegate: SearchLocationDelegate?
@@ -25,6 +27,7 @@ class LocationSearchTableViewController: UITableViewController {
     }
 }
 
+// MARK: UISearchResultUpdating Conformance
 extension LocationSearchTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let mapView = mapView, let searchText = searchController.searchBar.text else {
@@ -36,6 +39,10 @@ extension LocationSearchTableViewController: UISearchResultsUpdating {
         searchRequest.region = mapView.region
         let search = MKLocalSearch(request: searchRequest)
         search.start { [weak self] response, error in
+            guard !searchText.isEmpty else {
+                return
+            }
+            
             guard let response = response else {
                 self?.showAlertFor(ProximityError.searchFailure)
                 return
@@ -47,6 +54,7 @@ extension LocationSearchTableViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: UITableViewDataSource and Delegate Conformance
 extension LocationSearchTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchingLocations.count

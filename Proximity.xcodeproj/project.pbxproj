@@ -113,9 +113,9 @@
 				0BC4B9F222C93C80005748FE /* Cells */,
 				0B640C5422C939AE00525302 /* ViewControllers */,
 				0BA3F0D022C32DF9008AE56B /* AppDelegate.swift */,
-				0BA4AAC022D814DE00888B39 /* Locations.gpx */,
 				0BA3F0D722C32DFD008AE56B /* Assets.xcassets */,
 				0BA3F0DC22C32DFD008AE56B /* Info.plist */,
+				0BA4AAC022D814DE00888B39 /* Locations.gpx */,
 				0BA4AAC122D8175200888B39 /* Apple.gpx */,
 				0BA4AAC222D8176100888B39 /* Google.gpx */,
 			);

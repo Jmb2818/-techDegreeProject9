@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+/// A protocol for delegating back the location selected by the MapView
 protocol LocationDelegate: class {
     func locationSelected(locationString: String?, locationCoordinate: CLLocationCoordinate2D?)
 }
@@ -46,6 +47,12 @@ class MapViewController: UIViewController {
         focusOnLocation()
     }
     
+    @IBAction func refreshLocation(_ sender: UIButton) {
+        focusOnCurrentLocation()
+    }
+    
+    // MARK: Helper Functions
+    /// A function to setup the searchTableView and also the searchResultsController
     func setupSearch() {
         guard let searchTableVC = storyboard?.instantiateViewController(withIdentifier: "LocationSearchTableViewController") as? LocationSearchTableViewController else {
             return
@@ -68,10 +75,7 @@ class MapViewController: UIViewController {
         searchTableVC.searchController = searchResultsController
     }
     
-    @IBAction func refreshLocation(_ sender: UIButton) {
-        focusOnCurrentLocation()
-    }
-    
+    /// A function to focus on the saved location if it exists and if not then current location
     func focusOnLocation() {
         if hasSavedLocation {
             focusOnSavedLocation()
@@ -80,8 +84,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    
-    /// Funcion to zoom in on users current location if permission has been given
+    /// A funcion to zoom in on users current location if permission has been given
     func focusOnCurrentLocation() {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways  {
@@ -98,6 +101,7 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// A function to focus on a saved location
     func focusOnSavedLocation() {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways  {
@@ -114,24 +118,27 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// A function to format the refresh button
     func setupRefreshButton() {
         refreshLocationButton.layer.masksToBounds = false
         refreshLocationButton.layer.cornerRadius = 0.5 * refreshLocationButton.bounds.size.width
         refreshLocationButton.clipsToBounds = true
     }
     
+    /// A function to setup a tap gesture to add annotation
     func setupGestures() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(addAnnotationToLocation))
         mapView.addGestureRecognizer(tapRecognizer)
     }
     
+    /// A function to add an annotation and overlay for a coordinate on the MapView
     func addAnnotationAndOverlayFor(_ coordinate: CLLocationCoordinate2D) {
         let overlays = mapView.overlays
         if !overlays.isEmpty {
             mapView.removeOverlays(overlays)
         }
         annotation.coordinate = coordinate
-        mapView?.addOverlay(MKCircle(center: coordinate, radius: 100.0))
+        mapView?.addOverlay(MKCircle(center: coordinate, radius: 1000.0))
         mapView.addAnnotation(annotation)
     }
     
