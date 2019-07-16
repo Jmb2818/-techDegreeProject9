@@ -23,7 +23,6 @@ class DetailViewController: UIViewController {
     
     private weak var mapView: MapViewController!
     private var currentCoordinates: CLLocationCoordinate2D?
-    
     var reminder: Reminder?
     var model: ReminderModel?
     var coreDataStack: CoreDataStack?
@@ -175,25 +174,18 @@ private extension DetailViewController {
     }
     
     func formatViewButtons() {
-        // TODO: Use an array
-        onExitButton.layer.masksToBounds = false
-        onExitButton.layer.cornerRadius = 5
-        onExitButton.layer.borderWidth = 0
-        onExitButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        onExitButton.layer.shadowRadius = 2
-        onExitButton.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-        onExitButton.layer.shadowOpacity = 1
-        onExitButton.clipsToBounds = false
-        onEntryButton.layer.masksToBounds = false
-        onEntryButton.layer.cornerRadius = 5
-        onEntryButton.layer.borderWidth = 0
-        onEntryButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        onEntryButton.layer.shadowRadius = 2
-        onEntryButton.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-        onEntryButton.layer.shadowOpacity = 1
-        onEntryButton.clipsToBounds = false
-        onEntryButton.isSelected = false
-        onExitButton.isSelected = false
+        let onLocationButtons = [onExitButton, onEntryButton]
+        onLocationButtons.forEach { button in
+            button?.layer.masksToBounds = false
+            button?.layer.cornerRadius = 5
+            button?.layer.borderWidth = 0
+            button?.layer.shadowOffset = CGSize(width: 0, height: 4)
+            button?.layer.shadowRadius = 2
+            button?.layer.shadowColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+            button?.layer.shadowOpacity = 1
+            button?.clipsToBounds = false
+            button?.isSelected = false
+        }
     }
     
     func updateCount() {
