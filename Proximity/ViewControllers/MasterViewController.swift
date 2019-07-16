@@ -135,12 +135,10 @@ private extension MasterViewController {
     /// A function to check to make sure monitoring is allowed and then set it up off of the reminders
     @objc func monitorReminders() {
         guard CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) else {
-            // TODO: Throw an error that geo location is not allowed
             showAlertFor(ProximityError.needToAllowMonitoring)
             return
         }
         guard CLLocationManager.authorizationStatus() == .authorizedAlways else {
-            // TODO: Throw an error that you need to authorize always from settings
             showAlertFor(ProximityError.needsLocationAuthorization)
             return
         }
@@ -205,7 +203,11 @@ extension MasterViewController: CLLocationManagerDelegate {
 extension MasterViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // TODO: Check off event I think
-        print("UserSelectedEvent")
+        let identifier = response.notification.request.identifier
+        if let reminder = dataSource.reminderWithIdentifierMatching(identifier) {
+            reminder.setValue(true, forKey: ReminderKey.isChecked.rawValue)
+            coreDataStack.managedObjectContext.saveChanges()
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

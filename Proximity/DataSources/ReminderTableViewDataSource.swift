@@ -90,12 +90,15 @@ class ReminderTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func textForReminderWith(_ identifier: String) -> String {
-        if let reminders = fetchedResultsController.fetchedObjects,
-            let selectedReminder = reminders.first(where: { $0.identifier == identifier }){
+        if let selectedReminder = reminderWithIdentifierMatching(identifier){
             return selectedReminder.reminder
         } else {
             return ""
         }
+    }
+    
+    func reminderWithIdentifierMatching(_ identifier: String) -> Reminder? {
+        return reminders.first(where: { $0.identifier == identifier })
     }
 }
 
