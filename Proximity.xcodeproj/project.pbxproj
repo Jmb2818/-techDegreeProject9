@@ -47,9 +47,6 @@
 		0BA3F0E422C32F3E008AE56B /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		0BA3F0E622C44A15008AE56B /* ReminderTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewDataSource.swift; sourceTree = "<group>"; };
 		0BA3F0EA22C4506C008AE56B /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
-		0BA4AAC022D814DE00888B39 /* Locations.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Locations.gpx; sourceTree = "<group>"; };
-		0BA4AAC122D8175200888B39 /* Apple.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Apple.gpx; sourceTree = "<group>"; };
-		0BA4AAC222D8176100888B39 /* Google.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Google.gpx; sourceTree = "<group>"; };
 		0BA4AAC322D82F4D00888B39 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		0BA4AAC522D904C700888B39 /* MapFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFormatter.swift; sourceTree = "<group>"; };
 		0BC4B9F722CA787D005748FE /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
@@ -115,9 +112,6 @@
 				0BA3F0D022C32DF9008AE56B /* AppDelegate.swift */,
 				0BA3F0D722C32DFD008AE56B /* Assets.xcassets */,
 				0BA3F0DC22C32DFD008AE56B /* Info.plist */,
-				0BA4AAC022D814DE00888B39 /* Locations.gpx */,
-				0BA4AAC122D8175200888B39 /* Apple.gpx */,
-				0BA4AAC222D8176100888B39 /* Google.gpx */,
 			);
 			path = Proximity;
 			sourceTree = "<group>";
