@@ -208,6 +208,7 @@ extension MasterViewController: UNUserNotificationCenterDelegate {
             reminder.setValue(true, forKey: ReminderKey.isChecked.rawValue)
             coreDataStack.managedObjectContext.saveChanges()
         }
+        completionHandler()
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
