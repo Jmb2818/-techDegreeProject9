@@ -24,6 +24,12 @@ class LocationSearchTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController?.searchBar.delegate = self
+    }
+    
+    func resetSearch() {
+        self.matchingLocations = []
+        self.tableView.reloadData()
     }
 }
 
@@ -44,6 +50,11 @@ extension LocationSearchTableViewController: UISearchResultsUpdating {
             }
             
             guard let response = response else {
+                self?.resetSearch()
+                return
+            }
+            
+            if error != nil {
                 self?.showAlertFor(ProximityError.searchFailure)
                 return
             }
@@ -73,5 +84,23 @@ extension LocationSearchTableViewController {
         searchController?.searchBar.text = selectedLocation.name
         delegate?.searchResultSelected(placemark: selectedLocation)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension LocationSearchTableViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let controller = searchController {
+            updateSearchResults(for: controller)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let controller = searchController {
+            updateSearchResults(for: controller)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resetSearch()
     }
 }
